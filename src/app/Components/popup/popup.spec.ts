@@ -1,0 +1,25 @@
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+
+import { PopupComponent } from './popup';
+
+describe('PopupComponent', () => {
+  let component: PopupComponent;
+  let fixture: ComponentFixture<PopupComponent>;
+
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      imports: [PopupComponent]
+    })
+    .compileComponents();
+
+    fixture = TestBed.createComponent(PopupComponent);
+    component = fixtureInstance;
+    fixture.detectChanges();
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+});
+
+

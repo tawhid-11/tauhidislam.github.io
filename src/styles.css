@@ -1,0 +1,164 @@
+:root {
+    --bg-primary: #0a0a0a;
+    --bg-secondary: #0f172a;
+    --accent-primary: #0ea5e9;
+    --accent-secondary: #22d3ee;
+    --text-primary: #ffffff;
+    --text-secondary: #94a3b8;
+    --glass: rgba(30, 41, 59, 0.7);
+    --glass-border: rgba(255, 255, 255, 0.1);
+    --font-heading: 'Outfit', sans-serif;
+    --font-body: 'Inter', sans-serif;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    margin: 0;
+    overflow-x: hidden;
+    line-height: 1.6;
+}
+
+h1,
+h2,
+h3,
+h4,
+.font-heading {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 700;
+}
+
+/* Glassmorphism Utilities */
+.glass-panel,
+.glass-card {
+    background: var(--glass);
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
+    border: 1px solid var(--glass-border);
+    border-radius: 20px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glass-nav {
+    background: rgba(10, 10, 10, 0.7);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--glass-border);
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-fade-in {
+    animation: fadeIn 0.8s ease forwards;
+}
+
+.text-gradient {
+    background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-secondary) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* Animated Background Shapes */
+.blob {
+    position: absolute;
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(0, 242, 254, 0.15) 0%, rgba(79, 172, 254, 0) 70%);
+    filter: blur(60px);
+    z-index: -1;
+    pointer-events: none;
+}
+
+/* Buttons */
+.btn-primary-custom {
+    background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-secondary) 100%);
+    color: #000;
+    border: none;
+    padding: 12px 30px;
+    border-radius: 50px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.btn-primary-custom:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0, 242, 254, 0.3);
+    color: #000;
+}
+
+.btn-outline-custom {
+    background: transparent;
+    color: var(--text-primary);
+    border: 1px solid var(--glass-border);
+    padding: 12px 30px;
+    border-radius: 50px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.btn-outline-custom:hover {
+    background: var(--glass-bg);
+    border-color: var(--accent-primary);
+}
+
+/* Section Spacing */
+section {
+    padding: 100px 0;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg-primary);
+}
+
+::-webkit-scrollbar-thumb {
+    background: #333;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--accent-primary);
+}
+
+/* Nav Links */
+.nav-link-custom {
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+    font-size: 0.95rem;
+}
+
+.nav-link-custom:hover {
+    color: var(--accent-primary);
+}
+
+/* Card Hover Effects */
+.project-card {
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.project-card:hover {
+    transform: translateY(-10px);
+}

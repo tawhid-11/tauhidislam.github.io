@@ -1,0 +1,26 @@
+.navbar-brand-custom {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.brand-logo {
+    font-family: 'Outfit', sans-serif;
+    letter-spacing: 2px;
+}
+
+.nav-link-custom {
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.95rem;
+    transition: color 0.3s ease;
+    padding: 0.25rem 0;
+    border-bottom: 2px solid transparent;
+}
+
+.nav-link-custom:hover,
+.nav-link-custom.active {
+    color: var(--accent-primary);
+    border-bottom-color: var(--accent-primary);
+}

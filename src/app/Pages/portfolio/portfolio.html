@@ -1,0 +1,60 @@
+<section class="section-padded">
+    <div class="container">
+        <div class="section-header text-center mb-5">
+            <p class="section-badge">MY WORK</p>
+            <h1 class="section-title text-white">Portfolio</h1>
+            <p class="text-secondary">Projects I've built with passion and purpose</p>
+        </div>
+
+        <!-- Filter Buttons -->
+        <div class="filter-bar mb-5">
+            <button *ngFor="let f of filters" class="filter-btn" [class.active]="activeFilter === f"
+                (click)="setFilter(f)">{{ f }}</button>
+        </div>
+
+        <!-- Projects Grid -->
+        <div class="row g-4">
+            <div class="col-lg-4 col-md-6" *ngFor="let p of filteredProjects">
+                <div class="project-card glass-panel h-100">
+                    <!-- Image -->
+                    <div class="project-img-wrapper">
+                        <img [src]="p.imgUrl" [alt]="p.name" class="project-img"
+                            onerror="this.src='assets/img/placeholder-img.jpeg'">
+                        <div class="project-overlay">
+                            <a [href]="p.demo" class="overlay-btn" target="_blank">
+                                <i class="fa-solid fa-eye me-1"></i>Live
+                            </a>
+                            <a [href]="p.github" class="overlay-btn" target="_blank">
+                                <i class="fa-brands fa-github me-1"></i>Code
+                            </a>
+                        </div>
+                    </div>
+                    <!-- Info -->
+                    <div class="p-4">
+                        <div class="d-flex justify-content-between align-items-start mb-2">
+                            <h5 class="text-white mb-0">{{ p.name }}</h5>
+                            <span class="assoc-badge">{{ p.associationWith }}</span>
+                        </div>
+                        <p class="text-gradient small mb-2">{{ p.role }}</p>
+                        <p class="text-secondary small lh-lg mb-3">{{ p.desc }}</p>
+                        <div class="tech-pills">
+                            <span *ngFor="let t of p.tech" class="tech-pill">{{ t }}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- No results -->
+        <div class="text-center py-5" *ngIf="filteredProjects.length === 0">
+            <i class="fa-solid fa-folder-open text-secondary fs-1 mb-3 d-block"></i>
+            <p class="text-secondary">No projects found for this filter.</p>
+        </div>
+
+        <div class="text-center mt-5">
+            <a href="https://github.com/tawhid-11" target="_blank" class="btn-outline-custom px-5 py-3">
+                <i class="fa-brands fa-github me-2"></i>See All on GitHub
+            </a>
+        </div>
+    </div>
+</section>

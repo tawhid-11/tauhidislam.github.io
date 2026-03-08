@@ -1,0 +1,112 @@
+.section-padded {
+    padding: 6rem 0;
+}
+
+.section-badge {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 3px;
+    color: #0ea5e9;
+    margin-bottom: 0.75rem;
+}
+
+.section-title {
+    font-family: 'Outfit', sans-serif;
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    font-weight: 800;
+    margin-bottom: 0.5rem;
+}
+
+.about-img-wrapper {
+    position: relative;
+    display: inline-block;
+}
+
+.about-img {
+    width: 240px;
+    height: 240px;
+    object-fit: cover;
+    border-radius: 24px;
+    border: 3px solid rgba(14, 165, 233, 0.3);
+    position: relative;
+    z-index: 1;
+}
+
+.about-img-ring {
+    position: absolute;
+    inset: -12px;
+    border-radius: 30px;
+    border: 2px dashed rgba(14, 165, 233, 0.3);
+    animation: rotate-ring 12s linear infinite;
+    z-index: 0;
+}
+
+@keyframes rotate-ring {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.contact-pills {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    text-align: left;
+}
+
+.contact-pill {
+    display: flex;
+    align-items: center;
+    padding: 0.6rem 1rem;
+    background: rgba(30, 41, 59, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    color: #94a3b8;
+    font-size: 0.85rem;
+    text-decoration: none;
+    transition: all 0.3s;
+}
+
+.contact-pill:hover {
+    color: #0ea5e9;
+    border-color: rgba(14, 165, 233, 0.4);
+    background: rgba(14, 165, 233, 0.08);
+    transform: translateX(4px);
+}
+
+.tech-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    justify-content: center;
+}
+
+.tech-tag {
+    background: rgba(14, 165, 233, 0.08);
+    border: 1px solid rgba(14, 165, 233, 0.25);
+    color: #7dd3fc;
+    padding: 0.4rem 1.2rem;
+    border-radius: 30px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    transition: all 0.3s;
+    cursor: default;
+}
+
+.tech-tag:hover {
+    background: rgba(14, 165, 233, 0.15);
+    transform: translateY(-2px);
+}
+
+.edu-icon {
+    min-width: 56px;
+    text-align: center;
+}
+
+.cta-contact {
+    border: 1px solid rgba(14, 165, 233, 0.2) !important;
+}

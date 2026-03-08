@@ -1,0 +1,75 @@
+<!-- ===== ABOUT HERO ===== -->
+<section class="about-hero section-padded">
+    <div class="container">
+        <div class="row g-5 align-items-center">
+            <!-- Image -->
+            <div class="col-lg-4 text-center animate-fade-in">
+                <div class="about-img-wrapper">
+                    <img [src]="profile.image" [alt]="profile.name" class="about-img"
+                        onerror="this.src='assets/img/placeholder-img.jpeg'">
+                    <div class="about-img-ring"></div>
+                </div>
+                <!-- Contact Info -->
+                <div class="contact-pills mt-4">
+                    <a *ngFor="let c of contact" [href]="c.link || 'javascript:void(0)'"
+                        [target]="c.link ? '_blank' : '_self'" class="contact-pill">
+                        <i [class]="c.icon + ' me-2 text-gradient'"></i>
+                        <span>{{ c.value }}</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Bio -->
+            <div class="col-lg-8 animate-fade-in" style="animation-delay:0.2s">
+                <p class="section-badge">ABOUT ME</p>
+                <h1 class="section-title text-white">{{ profile.name }}</h1>
+                <h4 class="text-gradient mb-4">{{ profile.role }} · {{ profile.location }}</h4>
+                <p class="text-secondary fs-6 lh-lg mb-3">{{ profile.bio }}</p>
+                <p class="text-secondary fs-6 lh-lg">{{ profile.bio2 }}</p>
+                <div class="d-flex gap-3 mt-4 flex-wrap">
+                    <a routerLink="/experience" class="btn-primary-custom px-4 py-3">View Experience</a>
+                    <a routerLink="/portfolio" class="btn-outline-custom px-4 py-3">See My Work</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== TECH STACK ===== -->
+<section class="section-padded" style="padding-top:0">
+    <div class="container">
+        <div class="section-header text-center mb-5">
+            <p class="section-badge">TOOLS & TECH</p>
+            <h2 class="section-title text-white">My Tech Stack</h2>
+        </div>
+        <div class="tech-tags">
+            <span *ngFor="let tech of techStack" class="tech-tag">{{ tech }}</span>
+        </div>
+    </div>
+</section>
+
+<!-- ===== EDUCATION ===== -->
+<section class="section-padded" style="padding-top:0">
+    <div class="container">
+        <div class="section-header text-center mb-5">
+            <p class="section-badge">BACKGROUND</p>
+            <h2 class="section-title text-white">Education</h2>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-lg-8" *ngFor="let edu of education">
+                <div class="glass-panel p-4">
+                    <div class="d-flex align-items-center gap-3">
+                        <div class="edu-icon">
+                            <i class="fa-solid fa-graduation-cap text-gradient fs-2"></i>
+                        </div>
+                        <div>
+                            <h5 class="text-white mb-1">{{ edu.degree }}</h5>
+                            <p class="text-gradient mb-1">{{ edu.institution }}</p>
+                            <p class="text-secondary small mb-0">{{ edu.year }} · {{ edu.grade }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

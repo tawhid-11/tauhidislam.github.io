@@ -1,0 +1,76 @@
+<!-- Ambient Blobs -->
+<div class="blob blob-1"></div>
+<div class="blob blob-2"></div>
+
+<!-- Global Navbar -->
+<nav class="glass-nav navbar navbar-expand-lg sticky-top">
+    <div class="container">
+        <a class="navbar-brand text-gradient fw-bold fs-4" routerLink="/"
+            style="font-family:'Outfit',sans-serif;text-decoration:none;">
+            &lt;TAUHID's PORTFOLIO /&gt;
+        </a>
+
+        <button class="navbar-toggler border-0 text-white" type="button" (click)="toggleMenu()">
+            <i class="fa-solid fa-bars"></i>
+        </button>
+
+        <div class="collapse navbar-collapse" [class.show]="isMenuOpen" id="navbarNav">
+            <ul class="navbar-nav ms-auto align-items-center gap-1">
+                <li class="nav-item">
+                    <a class="nav-link nav-link-custom px-3" routerLink="/" routerLinkActive="nav-active"
+                        [routerLinkActiveOptions]="{exact:true}" (click)="isMenuOpen=false">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link nav-link-custom px-3" routerLink="/about" routerLinkActive="nav-active"
+                        (click)="isMenuOpen=false">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link nav-link-custom px-3" routerLink="/experience" routerLinkActive="nav-active"
+                        (click)="isMenuOpen=false">Experience</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link nav-link-custom px-3" routerLink="/portfolio" routerLinkActive="nav-active"
+                        (click)="isMenuOpen=false">Portfolio</a>
+                </li>
+                <li class="nav-item ms-2">
+                    <a class="btn-primary-custom px-4 py-2 text-decoration-none" style="cursor: pointer;"
+                        (click)="openEmail(); isMenuOpen=false"><i class="fa-solid fa-paper-plane me-2"></i>Hire Me</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- Page Content -->
+<main>
+    <router-outlet />
+</main>
+
+<!-- Global Footer -->
+<footer class="footer-global">
+    <div class="container">
+        <div class="row g-4 align-items-center">
+            <div class="col-md-4">
+                <p class="text-gradient fw-bold fs-5 mb-1" style="font-family:'Outfit',sans-serif;">&lt;PORTFOLIO /&gt;
+                </p>
+                <p class="text-secondary small mb-0">Building the web, one component at a time.</p>
+            </div>
+            <div class="col-md-4 text-center">
+                <div class="d-flex justify-content-center gap-4">
+                    <a href="https://github.com/tawhid-11" target="_blank" class="footer-social-link">
+                        <i class="fa-brands fa-github fs-5"></i>
+                    </a>
+                    <a href="https://www.linkedin.com/in/md-tauhid-islam-146406240" target="_blank" class="footer-social-link">
+                        <i class="fa-brands fa-linkedin fs-5"></i>
+                    </a>
+                    <a href="https://www.facebook.com/share/1E8XRLaPn3/" target="_blank" class="footer-social-link">
+                        <i class="fa-brands fa-facebook fs-5"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-4 text-md-end">
+                <p class="text-secondary small mb-0">© 2026 Portfolio. This is personal portfolio. All rights reserved.</p>
+            </div>
+        </div>
+    </div>
+</footer>
