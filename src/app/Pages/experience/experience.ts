@@ -13,8 +13,18 @@ export class ExperienceComponent {
     experiences = [
         {
             designation: 'Jr. Software Engineer',
+            organization: 'Global Software Architects',
+            tenure: 'May 2026 – Present',
+            type: 'Full-time',
+            description: 'Working with Senior Engineer and Team Members for building an excellent type of software for better user experience.',
+            skills: ['Angular 21', 'ASP.NET Core', 'TypeScript', 'SQL Server', 'Agile Methodologies'],
+            current: true
+        },
+
+        {
+            designation: 'Jr. Software Engineer',
             organization: 'Tech Stdio',
-            tenure: 'Oct 2025 – Present',
+            tenure: 'Dec 2025 – Mar 2026',
             type: 'Full-time',
             description: 'Working with Senior Engineer and Team Members for building an excellent type of software for better user experience.',
             skills: ['Angular 21', 'ASP.NET Core', 'TypeScript', 'SQL Server', 'Agile Methodologies'],
@@ -23,7 +33,7 @@ export class ExperienceComponent {
         {
             designation: 'Jr. Software Engineer Intern',
             organization: 'Tech Stdio',
-            tenure: 'Jul 2025 – Sep 2025',
+            tenure: 'Aug 2025 – Nov 2025',
             type: 'Full-time',
             description: 'Developed scalable website using Angular and Asp .NET Core. Integrated REST APIs. Take help from junior developers and improved team collaboration through process improvements.',
             skills: ['Angular', 'ASP.NET Core', 'SQL Server', 'Web API', 'MVC'],

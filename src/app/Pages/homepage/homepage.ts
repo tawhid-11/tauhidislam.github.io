@@ -20,10 +20,10 @@ export class HomepageComponent {
     };
 
     stats = [
-        { value: '6+', label: ' Months Experience' },
-        { value: '3+', label: 'Projects Worked On' },
-        { value: '1+', label: 'Happy Clients' },
-        { value: '1+', label: 'Open Source' },
+        { value: '10+', label: ' Months Experience' },
+        { value: '5+', label: 'Projects Worked On' },
+        { value: '2+', label: 'Happy Clients' },
+        { value: '2+', label: 'Open Source' },
     ];
 
     expertise = [
