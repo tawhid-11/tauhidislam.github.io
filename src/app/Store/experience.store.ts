@@ -1,9 +1,9 @@
 import { signalStore, withState, withMethods, patchState } from '@ngrx/signals';
 import { inject } from '@angular/core';
-import { ApiService } from '../Services/api/api';
-import { IExperience } from '../Interfaces/experience';
+import { ApiService } from '../services/api/api';
+import { IExperience } from '../interfaces/experience';
 import { lastValueFrom, map } from 'rxjs';
-import { sortByTenure } from '../Helpers/sort-by-date';
+import { sortByTenure } from '../helpers/sort-by-date';
 
 type ExperienceState = {
   experiences: IExperience[];

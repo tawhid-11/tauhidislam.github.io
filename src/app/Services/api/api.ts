@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { environment } from '../../Environment/environment';
+import { Observable, of } from 'rxjs';
+import { environment } from '../../environments/environment';
+import { PORTFOLIO_DATA } from '../../data/portfolio-data';
 
 @Injectable({
     providedIn: 'root'
@@ -12,22 +13,39 @@ export class ApiService {
     constructor(private http: HttpClient) { }
 
     getAboutInfo(): Observable<any> {
-        return this.http.get(`${this.baseUrl}/about`);
+        // Fallback to local data if dummy API URL is set
+        if (this.baseUrl.includes('your-api-url.com')) {
+            return of({ '-local': PORTFOLIO_DATA.profile });
+        }
+        return this.http.get(`${this.baseUrl}/about.json`);
     }
 
     getExperiencesInfo(): Observable<any> {
-        return this.http.get(`${this.baseUrl}/experiences`);
+        if (this.baseUrl.includes('your-api-url.com')) {
+            return of(PORTFOLIO_DATA.experiences);
+        }
+        return this.http.get(`${this.baseUrl}/experiences.json`);
     }
 
     getProjectsInfo(): Observable<any> {
-        return this.http.get(`${this.baseUrl}/projects`);
+        if (this.baseUrl.includes('your-api-url.com')) {
+            return of(PORTFOLIO_DATA.projects);
+        }
+        return this.http.get(`${this.baseUrl}/projects.json`);
     }
 
     getHomeInfo(): Observable<any> {
-        return this.http.get(`${this.baseUrl}/home`);
+        if (this.baseUrl.includes('your-api-url.com')) {
+            return of(PORTFOLIO_DATA.heroData);
+        }
+        return this.http.get(`${this.baseUrl}/home.json`);
     }
 
     getCertificationsInfo(): Observable<any> {
-        return this.http.get(`${this.baseUrl}/certifications`);
+        if (this.baseUrl.includes('your-api-url.com')) {
+            return of(PORTFOLIO_DATA.certifications);
+        }
+        return this.http.get(`${this.baseUrl}/certifications.json`);
     }
 }
+

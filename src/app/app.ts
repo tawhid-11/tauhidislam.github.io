@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+import { PORTFOLIO_DATA } from './data/portfolio-data';
 
 @Component({
   selector: 'app-root',
@@ -17,6 +18,7 @@ export class AppComponent {
   }
 
   openEmail() {
-    window.location.href = 'mailto:tshakib25@gmail.com';
+    window.location.href = `mailto:${PORTFOLIO_DATA.profile.email}`;
   }
 }
+

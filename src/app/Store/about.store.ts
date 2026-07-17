@@ -1,8 +1,8 @@
 // about.store.ts
 import { signalStore, withState, withMethods, patchState } from '@ngrx/signals';
 import { inject } from '@angular/core';
-import { ApiService } from '../Services/api/api';
-import { IAbout } from '../Interfaces/about';
+import { ApiService } from '../services/api/api';
+import { IAbout } from '../interfaces/about';
 import { lastValueFrom, map } from 'rxjs';
 
 type AboutState = {

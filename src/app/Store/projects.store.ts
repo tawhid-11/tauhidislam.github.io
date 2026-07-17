@@ -1,7 +1,7 @@
 import { signalStore, withState, withMethods, patchState } from '@ngrx/signals';
 import { inject } from '@angular/core';
-import { ApiService } from '../Services/api/api';
-import { IProject } from '../Interfaces/project';
+import { ApiService } from '../services/api/api';
+import { IProject } from '../interfaces/project';
 import { lastValueFrom, map } from 'rxjs';
 
 type ProjectState = {

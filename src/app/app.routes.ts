@@ -4,25 +4,26 @@ export const routes: Routes = [
     {
         path: '',
         loadComponent: () =>
-            import('./Pages/homepage/homepage').then(c => c.HomepageComponent)
+            import('./pages/homepage/homepage').then(c => c.HomepageComponent)
     },
     {
         path: 'about',
         loadComponent: () =>
-            import('./Pages/about/about').then(c => c.AboutComponent)
+            import('./pages/about/about').then(c => c.AboutComponent)
     },
     {
         path: 'experience',
         loadComponent: () =>
-            import('./Pages/experience/experience').then(c => c.ExperienceComponent)
+            import('./pages/experience/experience').then(c => c.ExperienceComponent)
     },
     {
         path: 'portfolio',
         loadComponent: () =>
-            import('./Pages/portfolio/portfolio').then(c => c.PortfolioComponent)
+            import('./pages/portfolio/portfolio').then(c => c.PortfolioComponent)
     },
     {
         path: '**',
         redirectTo: ''
     }
 ];
+

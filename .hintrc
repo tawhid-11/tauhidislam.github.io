@@ -23,7 +23,8 @@
         "link-name": "off"
       }
     ],
-    "disown-opener": "off"
+    "disown-opener": "off",
+    "typescript-config/consistent-casing": "off"
   },
   "browserslist": [
     "defaults",
