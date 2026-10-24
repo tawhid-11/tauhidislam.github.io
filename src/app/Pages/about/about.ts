@@ -15,5 +15,15 @@ export class AboutComponent {
     techStack = PORTFOLIO_DATA.techStack;
     education = PORTFOLIO_DATA.education;
     contact = PORTFOLIO_DATA.contact;
-}
 
+    emailCopied = false;
+
+    copyEmail(): void {
+        if (navigator.clipboard) {
+            navigator.clipboard.writeText(this.profile.email).then(() => {
+                this.emailCopied = true;
+                setTimeout(() => (this.emailCopied = false), 2500);
+            });
+        }
+    }
+}

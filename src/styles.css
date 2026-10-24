@@ -162,3 +162,7 @@ section {
 .project-card:hover {
     transform: translateY(-10px);
 }
+
+.text-cyan {
+    color: #22d3ee !important;
+}

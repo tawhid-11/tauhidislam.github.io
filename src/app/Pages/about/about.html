@@ -2,7 +2,7 @@
 <section class="about-hero section-padded">
     <div class="container">
         <div class="row g-5 align-items-center">
-            <!-- Image -->
+            <!-- Image & Contact -->
             <div class="col-lg-4 text-center animate-fade-in">
                 <div class="about-img-wrapper">
                     <img [src]="profile.image" [alt]="profile.name" class="about-img"
@@ -14,8 +14,12 @@
                     <a *ngFor="let c of contact" [href]="c.link || 'javascript:void(0)'"
                         [target]="c.link ? '_blank' : '_self'" class="contact-pill">
                         <i [class]="c.icon + ' me-2 text-gradient'"></i>
-                        <span>{{ c.value }}</span>
+                        <span class="text-truncate">{{ c.value }}</span>
                     </a>
+                    <button class="contact-pill border-0 text-start w-100" (click)="copyEmail()" style="cursor: pointer;">
+                        <i [class]="emailCopied ? 'fa-solid fa-check text-success me-2' : 'fa-regular fa-copy text-gradient me-2'"></i>
+                        <span>{{ emailCopied ? 'Email Copied to Clipboard!' : 'Click to Copy Email' }}</span>
+                    </button>
                 </div>
             </div>
 
@@ -29,6 +33,9 @@
                 <div class="d-flex gap-3 mt-4 flex-wrap">
                     <a routerLink="/experience" class="btn-primary-custom px-4 py-3">View Experience</a>
                     <a routerLink="/portfolio" class="btn-outline-custom px-4 py-3">See My Work</a>
+                    <a href="assets/my-cv.pdf" target="_blank" class="btn-outline-custom px-4 py-3 text-decoration-none">
+                        <i class="fa-solid fa-file-pdf me-2"></i>Download CV
+                    </a>
                 </div>
             </div>
         </div>
@@ -39,8 +46,9 @@
 <section class="section-padded" style="padding-top:0">
     <div class="container">
         <div class="section-header text-center mb-5">
-            <p class="section-badge">TOOLS & TECH</p>
-            <h2 class="section-title text-white">My Tech Stack</h2>
+            <p class="section-badge">CORE CAPABILITIES</p>
+            <h2 class="section-title text-white">My Tech Stack &amp; Tools</h2>
+            <p class="text-secondary">Languages, frameworks, databases, and architectural patterns</p>
         </div>
         <div class="tech-tags">
             <span *ngFor="let tech of techStack" class="tech-tag">{{ tech }}</span>
@@ -52,20 +60,21 @@
 <section class="section-padded" style="padding-top:0">
     <div class="container">
         <div class="section-header text-center mb-5">
-            <p class="section-badge">BACKGROUND</p>
+            <p class="section-badge">ACADEMIC BACKGROUND</p>
             <h2 class="section-title text-white">Education</h2>
+            <p class="text-secondary">Academic journey and foundational computer science training</p>
         </div>
         <div class="row justify-content-center">
-            <div class="col-lg-8" *ngFor="let edu of education">
-                <div class="glass-panel p-4">
+            <div class="col-lg-8 mb-4" *ngFor="let edu of education">
+                <div class="glass-panel p-4 h-100">
                     <div class="d-flex align-items-center gap-3">
                         <div class="edu-icon">
                             <i class="fa-solid fa-graduation-cap text-gradient fs-2"></i>
                         </div>
                         <div>
-                            <h5 class="text-white mb-1">{{ edu.degree }}</h5>
-                            <p class="text-gradient mb-1">{{ edu.institution }}</p>
-                            <p class="text-secondary small mb-0">{{ edu.year }} · {{ edu.grade }}</p>
+                            <h5 class="text-white mb-1 fw-bold">{{ edu.degree }}</h5>
+                            <p class="text-gradient mb-1 fw-medium">{{ edu.institution }}</p>
+                            <p class="text-secondary small mb-0">{{ edu.year }} · <span class="badge bg-secondary-subtle text-cyan">{{ edu.grade }}</span></p>
                         </div>
                     </div>
                 </div>

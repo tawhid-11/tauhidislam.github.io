@@ -10,7 +10,7 @@
             &lt;TAUHID's PORTFOLIO /&gt;
         </a>
 
-        <button class="navbar-toggler border-0 text-white" type="button" (click)="toggleMenu()">
+        <button class="navbar-toggler border-0 text-white" type="button" (click)="toggleMenu()" aria-label="Toggle navigation">
             <i class="fa-solid fa-bars"></i>
         </button>
 
@@ -32,9 +32,11 @@
                     <a class="nav-link nav-link-custom px-3" routerLink="/portfolio" routerLinkActive="nav-active"
                         (click)="isMenuOpen=false">Portfolio</a>
                 </li>
-                <li class="nav-item ms-2">
-                    <a class="btn-primary-custom px-4 py-2 text-decoration-none" style="cursor: pointer;"
-                        (click)="openEmail(); isMenuOpen=false"><i class="fa-solid fa-paper-plane me-2"></i>Hire Me</a>
+                <li class="nav-item ms-lg-2 mt-2 mt-lg-0">
+                    <button class="btn-primary-custom px-4 py-2 border-0" style="cursor: pointer;"
+                        (click)="openContactModal()">
+                        <i class="fa-solid fa-paper-plane me-2"></i>Hire Me
+                    </button>
                 </li>
             </ul>
         </div>
@@ -46,6 +48,11 @@
     <router-outlet />
 </main>
 
+<!-- Scroll To Top Button -->
+<button class="scroll-to-top-btn" [class.show]="showScrollTop" (click)="scrollToTop()" title="Back to top">
+    <i class="fa-solid fa-arrow-up"></i>
+</button>
+
 <!-- Global Footer -->
 <footer class="footer-global">
     <div class="container">
@@ -53,24 +60,107 @@
             <div class="col-md-4">
                 <p class="text-gradient fw-bold fs-5 mb-1" style="font-family:'Outfit',sans-serif;">&lt;PORTFOLIO /&gt;
                 </p>
-                <p class="text-secondary small mb-0">Passionate about creating exceptional digital experiences.</p>
+                <p class="text-secondary small mb-0">Building robust, scalable, and high-performance digital experiences.</p>
             </div>
             <div class="col-md-4 text-center">
                 <div class="d-flex justify-content-center gap-4">
-                    <a href="https://github.com/tawhid-11" target="_blank" class="footer-social-link">
+                    <a href="https://github.com/tawhid-11" target="_blank" class="footer-social-link" title="GitHub">
                         <i class="fa-brands fa-github fs-5"></i>
                     </a>
-                    <a href="https://www.linkedin.com/in/md-tauhid-islam-146406240" target="_blank" class="footer-social-link">
+                    <a href="https://www.linkedin.com/in/md-tauhid-islam-146406240" target="_blank" class="footer-social-link" title="LinkedIn">
                         <i class="fa-brands fa-linkedin fs-5"></i>
                     </a>
-                    <a href="https://www.facebook.com/share/1E8XRLaPn3/" target="_blank" class="footer-social-link">
+                    <a href="https://www.facebook.com/share/1E8XRLaPn3/" target="_blank" class="footer-social-link" title="Facebook">
                         <i class="fa-brands fa-facebook fs-5"></i>
                     </a>
                 </div>
             </div>
             <div class="col-md-4 text-md-end">
-                <p class="text-secondary small mb-0">© 2026 Portfolio. This is personal portfolio. All rights reserved.</p>
+                <p class="text-secondary small mb-0">© 2026 Md. Tauhid Islam. All rights reserved.</p>
             </div>
         </div>
     </div>
 </footer>
+
+<!-- ===== QUICK CONTACT MODAL ===== -->
+<div class="contact-modal-backdrop" *ngIf="isContactModalOpen" (click)="closeContactModal()">
+    <div class="contact-modal glass-panel p-4 p-md-5" (click)="$event.stopPropagation()">
+        <button class="modal-close-btn" (click)="closeContactModal()" title="Close">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+
+        <div class="text-center mb-4">
+            <p class="section-badge mb-1">LET'S CONNECT</p>
+            <h3 class="text-white fw-bold mb-2">Get in Touch</h3>
+            <p class="text-secondary small mb-0">
+                I am currently open to full-time, part-time, or contract software engineering opportunities.
+            </p>
+        </div>
+
+        <div class="contact-card-options d-flex flex-column gap-3 mb-4">
+            <!-- Direct Email Link -->
+            <a [href]="'mailto:' + profile.email" class="contact-option-btn text-decoration-none">
+                <div class="d-flex align-items-center gap-3">
+                    <div class="option-icon">
+                        <i class="fa-solid fa-envelope fs-5 text-gradient"></i>
+                    </div>
+                    <div class="text-start">
+                        <div class="text-white fw-semibold small">Send an Email</div>
+                        <div class="text-secondary small">{{ profile.email }}</div>
+                    </div>
+                </div>
+                <i class="fa-solid fa-arrow-up-right-from-square text-secondary small"></i>
+            </a>
+
+            <!-- Copy Email Button -->
+            <button class="contact-option-btn border-0 text-start w-100" (click)="copyEmail()">
+                <div class="d-flex align-items-center gap-3">
+                    <div class="option-icon">
+                        <i [class]="emailCopied ? 'fa-solid fa-check fs-5 text-success' : 'fa-regular fa-copy fs-5 text-gradient'"></i>
+                    </div>
+                    <div>
+                        <div class="text-white fw-semibold small">{{ emailCopied ? 'Copied to Clipboard!' : 'Copy Email Address' }}</div>
+                        <div class="text-secondary small">{{ profile.email }}</div>
+                    </div>
+                </div>
+                <span class="badge" [class.bg-success]="emailCopied" [class.bg-secondary-subtle]="!emailCopied">
+                    {{ emailCopied ? 'Copied!' : 'Click to Copy' }}
+                </span>
+            </button>
+
+            <!-- LinkedIn Profile -->
+            <a href="https://www.linkedin.com/in/md-tauhid-islam-146406240" target="_blank" class="contact-option-btn text-decoration-none">
+                <div class="d-flex align-items-center gap-3">
+                    <div class="option-icon">
+                        <i class="fa-brands fa-linkedin fs-5 text-gradient"></i>
+                    </div>
+                    <div class="text-start">
+                        <div class="text-white fw-semibold small">LinkedIn Message</div>
+                        <div class="text-secondary small">Connect &amp; Chat Professionally</div>
+                    </div>
+                </div>
+                <i class="fa-solid fa-arrow-up-right-from-square text-secondary small"></i>
+            </a>
+
+            <!-- GitHub Profile -->
+            <a href="https://github.com/tawhid-11" target="_blank" class="contact-option-btn text-decoration-none">
+                <div class="d-flex align-items-center gap-3">
+                    <div class="option-icon">
+                        <i class="fa-brands fa-github fs-5 text-gradient"></i>
+                    </div>
+                    <div class="text-start">
+                        <div class="text-white fw-semibold small">GitHub Profile</div>
+                        <div class="text-secondary small">Explore Open Source &amp; Code</div>
+                    </div>
+                </div>
+                <i class="fa-solid fa-arrow-up-right-from-square text-secondary small"></i>
+            </a>
+        </div>
+
+        <div class="text-center">
+            <button class="btn-outline-custom px-4 py-2 small" (click)="closeContactModal()">
+                Close
+            </button>
+        </div>
+    </div>
+</div>

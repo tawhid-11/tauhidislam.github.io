@@ -6,7 +6,9 @@
             <div class="col-lg-6 animate-fade-in">
                 <p class="hero-badge">{{ heroData.badge }}</p>
                 <h1 class="hero-name">{{ heroData.name }}</h1>
-                <h2 class="hero-role text-gradient">{{ heroData.role }}</h2>
+                <h2 class="hero-role text-gradient min-role-height">
+                    {{ displayedRole }}<span class="type-cursor">|</span>
+                </h2>
                 <p class="hero-desc">{{ heroData.description }}</p>
                 <div class="d-flex flex-wrap gap-3 mt-4">
                     <a routerLink="/portfolio" class="btn-primary-custom px-4 py-3">View My Work</a>
@@ -16,14 +18,20 @@
                         <i class="fa-solid fa-eye me-2"></i>View CV
                     </a>
                 </div>
-                <!-- Social Links -->
-                <div class="hero-socials mt-5">
-                    <a href="https://github.com/tawhid-11" target="_blank" class="social-icon"><i
-                            class="fa-brands fa-github"></i></a>
-                    <a href="https://www.linkedin.com/in/md-tauhid-islam-146406240" target="_blank"
-                        class="social-icon"><i class="fa-brands fa-linkedin"></i></a>
-                    <a href="https://www.facebook.com/share/1E8XRLaPn3/" target="_blank" class="social-icon"><i
-                            class="fa-brands fa-facebook"></i></a>
+                <!-- Social Links & Quick Contact -->
+                <div class="d-flex align-items-center gap-3 mt-5 flex-wrap">
+                    <div class="hero-socials">
+                        <a href="https://github.com/tawhid-11" target="_blank" class="social-icon" title="GitHub"><i
+                                class="fa-brands fa-github"></i></a>
+                        <a href="https://www.linkedin.com/in/md-tauhid-islam-146406240" target="_blank"
+                            class="social-icon" title="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
+                        <a href="https://www.facebook.com/share/1E8XRLaPn3/" target="_blank" class="social-icon" title="Facebook"><i
+                                class="fa-brands fa-facebook"></i></a>
+                    </div>
+                    <button class="quick-copy-btn" (click)="copyEmail()" title="Copy Email">
+                        <i [class]="emailCopied ? 'fa-solid fa-check text-success me-2' : 'fa-regular fa-copy me-2'"></i>
+                        <span>{{ emailCopied ? 'Copied!' : 'Copy Email' }}</span>
+                    </button>
                 </div>
             </div>
             <!-- Profile Card -->
@@ -32,15 +40,16 @@
                     <div class="profile-img-wrapper mx-auto mb-4">
                         <img [src]="heroData.image" alt="Profile Photo" class="profile-img"
                             onerror="this.src='assets/img/placeholder-img.jpeg'">
-                        <div class="online-dot"></div>
+                        <div class="online-dot" title="Available for opportunities"></div>
                     </div>
                     <h4 class="text-white mb-1">{{ heroData.name }}</h4>
                     <p class="text-gradient mb-3">{{ heroData.role }}</p>
                     <div class="tag-row">
                         <span class="skill-tag">Angular</span>
                         <span class="skill-tag">ASP.NET Core</span>
+                        <span class="skill-tag">Clean Architecture</span>
                         <span class="skill-tag">SQL Server</span>
-                        <span class="skill-tag">Software Development</span>
+                        <span class="skill-tag">SignalR</span>
                     </div>
                 </div>
             </div>
@@ -66,16 +75,16 @@
         <div class="section-header text-center mb-5">
             <p class="section-badge">EXPERTISE</p>
             <h2 class="section-title text-white">Technical Skills</h2>
-            <p class="section-sub">Technologies I use to build exceptional digital products</p>
+            <p class="section-sub">Modern technologies & architectures I leverage to build robust software</p>
         </div>
         <div class="row g-4">
-            <div class="col-md-4 col-sm-6" *ngFor="let item of expertise">
+            <div class="col-lg-4 col-md-6" *ngFor="let item of expertise">
                 <div class="skill-card glass-panel p-4">
                     <div class="skill-icon mb-3">
                         <i [class]="item.icon" [style.color]="item.color"></i>
                     </div>
                     <h5 class="text-white mb-2">{{ item.title }}</h5>
-                    <p class="text-secondary small mb-0">{{ item.desc }}</p>
+                    <p class="text-secondary small mb-0 lh-base">{{ item.desc }}</p>
                 </div>
             </div>
         </div>
@@ -88,10 +97,10 @@
         <div class="row g-5 align-items-center">
             <div class="col-lg-6">
                 <p class="section-badge">HOW I WORK</p>
-                <h2 class="section-title text-white mb-4">My Philosophy</h2>
+                <h2 class="section-title text-white mb-4">Engineering Philosophy</h2>
                 <p class="text-secondary mb-4">
-                    I believe great software is at the intersection of elegant code and outstanding user experience.
-                    Every line I write is intentional, every design decision purposeful.
+                    I believe great software is at the intersection of elegant architecture, clean code, and outstanding user experience.
+                    Every component is crafted with performance, scalability, and maintainability in mind.
                 </p>
                 <ul class="philosophy-list">
                     <li *ngFor="let point of philosophyPoints">
@@ -114,22 +123,22 @@
                         <div class="col-6">
                             <div class="mini-stat">
                                 <i class="fa-solid fa-star text-gradient fs-2 mb-2"></i>
-                                <h4 class="text-white">4.5/5</h4>
-                                <p class="text-secondary small">User Rating</p>
+                                <h4 class="text-white">5.0 / 5</h4>
+                                <p class="text-secondary small">Code Quality</p>
                             </div>
                         </div>
                         <div class="col-6">
                             <div class="mini-stat">
                                 <i class="fa-solid fa-clock text-gradient fs-2 mb-2"></i>
-                                <h4 class="text-white">24h</h4>
+                                <h4 class="text-white">&lt; 24h</h4>
                                 <p class="text-secondary small">Response Time</p>
                             </div>
                         </div>
                         <div class="col-6">
                             <div class="mini-stat">
-                                <i class="fa-solid fa-trophy text-gradient fs-2 mb-2"></i>
-                                <h4 class="text-white">4+</h4>
-                                <p class="text-secondary small">Awards Won</p>
+                                <i class="fa-solid fa-shield-halved text-gradient fs-2 mb-2"></i>
+                                <h4 class="text-white">100%</h4>
+                                <p class="text-secondary small">Clean Architecture</p>
                             </div>
                         </div>
                     </div>
@@ -143,13 +152,18 @@
 <section class="cta-section section-padded">
     <div class="container">
         <div class="cta-box glass-panel p-5 text-center">
-            <h2 class="text-white mb-3">Ready to build something amazing?</h2>
-            <p class="text-secondary mb-4">Let's collaborate and turn your ideas into reality.</p>
-            <div class="d-flex justify-content-center gap-3 flex-wrap">
+            <h2 class="text-white mb-3">Ready to build something exceptional?</h2>
+            <p class="text-secondary mb-4">Let's collaborate and turn innovative ideas into scalable reality.</p>
+            <div class="d-flex justify-content-center gap-3 flex-wrap align-items-center">
                 <a routerLink="/portfolio" class="btn-primary-custom px-5 py-3">View Projects</a>
+                <button (click)="copyEmail()" class="btn-outline-custom px-4 py-3 border-0 bg-secondary-subtle text-white">
+                    <i [class]="emailCopied ? 'fa-solid fa-check text-success me-2' : 'fa-regular fa-copy me-2'"></i>
+                    {{ emailCopied ? 'Email Copied!' : 'Copy Email' }}
+                </button>
                 <a (click)="openEmail()" style="cursor: pointer;"
-                    class="btn-outline-custom text-decoration-none px-5 py-3"><i
-                        class="fa-solid fa-paper-plane me-2"></i>Get In Touch</a>
+                    class="btn-outline-custom text-decoration-none px-4 py-3">
+                    <i class="fa-solid fa-paper-plane me-2"></i>Get In Touch
+                </a>
             </div>
         </div>
     </div>

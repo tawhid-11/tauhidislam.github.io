@@ -2,8 +2,8 @@
     <div class="container">
         <div class="section-header text-center mb-5">
             <p class="section-badge">MY WORK</p>
-            <h1 class="section-title text-white">Portfolio</h1>
-            <p class="text-secondary">Projects I've built with passion and purpose</p>
+            <h1 class="section-title text-white">Featured Projects</h1>
+            <p class="text-secondary">Enterprise applications, real-time systems, and scalable full-stack solutions</p>
         </div>
 
         <!-- Filter Buttons -->
@@ -15,30 +15,39 @@
         <!-- Projects Grid -->
         <div class="row g-4">
             <div class="col-lg-4 col-md-6" *ngFor="let p of filteredProjects">
-                <div class="project-card glass-panel h-100">
+                <div class="project-card glass-panel h-100" (click)="openProjectModal(p)" style="cursor: pointer;">
                     <!-- Image -->
                     <div class="project-img-wrapper">
                         <img [src]="p.imgUrl" [alt]="p.name" class="project-img"
                             onerror="this.src='assets/img/placeholder-img.jpeg'">
-                        <div class="project-overlay">
-                            <a [href]="p.demo" class="overlay-btn" target="_blank">
-                                <i class="fa-solid fa-eye me-1"></i>Live
-                            </a>
+                        <div class="project-overlay" (click)="$event.stopPropagation()">
+                            <button class="overlay-btn" (click)="openProjectModal(p)">
+                                <i class="fa-solid fa-circle-info me-1"></i>Details
+                            </button>
                             <a [href]="p.github" class="overlay-btn" target="_blank">
                                 <i class="fa-brands fa-github me-1"></i>Code
                             </a>
                         </div>
                     </div>
                     <!-- Info -->
-                    <div class="p-4">
-                        <div class="d-flex justify-content-between align-items-start mb-2">
-                            <h5 class="text-white mb-0">{{ p.name }}</h5>
-                            <span class="assoc-badge">{{ p.associationWith }}</span>
+                    <div class="p-4 d-flex flex-column justify-content-between flex-grow-1">
+                        <div>
+                            <div class="d-flex justify-content-between align-items-start mb-2">
+                                <h5 class="text-white mb-0 project-title">{{ p.name }}</h5>
+                                <span class="assoc-badge">{{ p.associationWith }}</span>
+                            </div>
+                            <p class="text-gradient small mb-2 fw-semibold">{{ p.role }}</p>
+                            <p class="text-secondary small lh-base mb-3">{{ p.desc }}</p>
                         </div>
-                        <p class="text-gradient small mb-2">{{ p.role }}</p>
-                        <p class="text-secondary small lh-lg mb-3">{{ p.desc }}</p>
-                        <div class="tech-pills">
-                            <span *ngFor="let t of p.tech" class="tech-pill">{{ t }}</span>
+                        <div>
+                            <div class="tech-pills mb-3">
+                                <span *ngFor="let t of p.tech.slice(0, 4)" class="tech-pill">{{ t }}</span>
+                                <span *ngIf="p.tech.length > 4" class="tech-pill-more">+{{ p.tech.length - 4 }}</span>
+                            </div>
+                            <div class="d-flex align-items-center text-primary-custom small fw-semibold">
+                                <span>View Full Architecture &amp; Highlights</span>
+                                <i class="fa-solid fa-arrow-right ms-2 small"></i>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -48,13 +57,77 @@
         <!-- No results -->
         <div class="text-center py-5" *ngIf="filteredProjects.length === 0">
             <i class="fa-solid fa-folder-open text-secondary fs-1 mb-3 d-block"></i>
-            <p class="text-secondary">No projects found for this filter.</p>
+            <p class="text-secondary">No projects found for this filter category.</p>
         </div>
 
         <div class="text-center mt-5">
             <a href="https://github.com/tawhid-11" target="_blank" class="btn-outline-custom px-5 py-3">
-                <i class="fa-brands fa-github me-2"></i>See All on GitHub
+                <i class="fa-brands fa-github me-2"></i>Explore All Repositories on GitHub
             </a>
         </div>
     </div>
 </section>
+
+<!-- ===== PROJECT DETAILS MODAL ===== -->
+<div class="project-modal-backdrop" *ngIf="selectedProject" (click)="closeProjectModal()">
+    <div class="project-modal glass-panel" (click)="$event.stopPropagation()">
+        <!-- Modal Header -->
+        <div class="modal-img-wrapper">
+            <img [src]="selectedProject.imgUrl" [alt]="selectedProject.name" class="modal-banner-img"
+                onerror="this.src='assets/img/placeholder-img.jpeg'">
+            <button class="modal-close-btn" (click)="closeProjectModal()" title="Close">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div class="modal-img-overlay">
+                <span class="assoc-badge">{{ selectedProject.associationWith }}</span>
+            </div>
+        </div>
+
+        <!-- Modal Body -->
+        <div class="p-4 p-md-5">
+            <div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-3">
+                <h3 class="text-white mb-0 fw-bold">{{ selectedProject.name }}</h3>
+                <span class="text-gradient fw-semibold">{{ selectedProject.role }}</span>
+            </div>
+
+            <p class="text-secondary lh-lg mb-4">{{ selectedProject.desc }}</p>
+
+            <!-- Key Features / Technical Highlights -->
+            <div class="mb-4" *ngIf="selectedProject.features && selectedProject.features.length > 0">
+                <h5 class="text-white mb-3 fs-6 fw-bold">
+                    <i class="fa-solid fa-star text-gradient me-2"></i>Key Architectural Features &amp; Highlights:
+                </h5>
+                <ul class="feature-list">
+                    <li *ngFor="let feat of selectedProject.features">
+                        <i class="fa-solid fa-check text-cyan me-2"></i>
+                        <span>{{ feat }}</span>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Tech Stack Tags -->
+            <div class="mb-4">
+                <h5 class="text-white mb-3 fs-6 fw-bold">
+                    <i class="fa-solid fa-layer-group text-gradient me-2"></i>Technologies &amp; Libraries:
+                </h5>
+                <div class="tech-pills">
+                    <span *ngFor="let t of selectedProject.tech" class="tech-pill-modal">{{ t }}</span>
+                </div>
+            </div>
+
+            <!-- Modal Actions -->
+            <div class="d-flex flex-wrap gap-3 mt-4 pt-3 border-top border-secondary-subtle">
+                <a [href]="selectedProject.github" target="_blank" class="btn-primary-custom px-4 py-2">
+                    <i class="fa-brands fa-github me-2"></i>View Source Code
+                </a>
+                <a *ngIf="selectedProject.demo && selectedProject.demo !== '#'" [href]="selectedProject.demo" target="_blank"
+                    class="btn-outline-custom px-4 py-2">
+                    <i class="fa-solid fa-arrow-up-right-from-square me-2"></i>Live Demo
+                </a>
+                <button (click)="closeProjectModal()" class="btn-outline-custom px-4 py-2 ms-auto">
+                    Close
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
