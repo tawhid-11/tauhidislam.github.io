@@ -246,5 +246,23 @@ export const PORTFOLIO_DATA = {
       github: 'https://github.com/tawhid-11/DoctorsAppointmentSystem',
       demo: '',
     },
+    {
+      name: 'E-Commerce Clean Architecture API',
+      role: 'Backend Architect & Developer',
+      associationWith: 'Enterprise API',
+      tags: ['All', 'Full-Stack', 'Backend', 'ASP.NET Core'],
+      imgUrl: 'assets/img/backend.png',
+      desc: 'Robust E-Commerce backend API engineered with Clean Architecture, CQRS, and SQL Server. Features secure product catalog management, order processing, and payment integration.',
+      features: [
+        'Clean Architecture adhering to SOLID and separation of concerns',
+        'Repository & Unit of Work patterns for decoupled database operations',
+        'JWT token authentication, refresh tokens, and role-based access control',
+        'Optimized Microsoft SQL Server schema with relational integrity and indexes',
+        'Swagger / OpenAPI interactive documentation for seamless API consumption',
+      ],
+      tech: ['ASP.NET Core', 'C#', 'SQL Server', 'Entity Framework Core', 'Clean Architecture', 'JWT'],
+      github: 'https://github.com/tawhid-11',
+      demo: '',
+    },
   ] as IProject[],
 };

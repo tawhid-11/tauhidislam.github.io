@@ -14,7 +14,7 @@
 
         <!-- Projects Grid -->
         <div class="row g-4">
-            <div class="col-lg-4 col-md-6" *ngFor="let p of filteredProjects">
+            <div class="col-lg-4 col-md-6" *ngFor="let p of displayedProjects">
                 <div class="project-card glass-panel h-100" (click)="openProjectModal(p)" style="cursor: pointer;">
                     <!-- Image -->
                     <div class="project-img-wrapper">
@@ -52,6 +52,14 @@
                     </div>
                 </div>
             </div>
+        </div>
+
+        <!-- Show More / Less button if projects exceed limit -->
+        <div class="text-center mt-4" *ngIf="filteredProjects.length > visibleLimit">
+            <button class="btn-primary-custom px-4 py-2 border-0" (click)="toggleShowAll()">
+                <i [class]="showAll ? 'fa-solid fa-chevron-up me-2' : 'fa-solid fa-chevron-down me-2'"></i>
+                {{ showAll ? 'Show Fewer Projects' : 'Show All Projects (' + filteredProjects.length + ')' }}
+            </button>
         </div>
 
         <!-- No results -->

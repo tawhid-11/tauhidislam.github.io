@@ -15,14 +15,26 @@ export class PortfolioComponent {
 
     allProjects = PORTFOLIO_DATA.projects;
     selectedProject: IProject | null = null;
+    visibleLimit = 6;
+    showAll = false;
 
     get filteredProjects(): IProject[] {
         if (this.activeFilter === 'All') return this.allProjects;
         return this.allProjects.filter(p => p.tags.includes(this.activeFilter));
     }
 
+    get displayedProjects(): IProject[] {
+        if (this.showAll) return this.filteredProjects;
+        return this.filteredProjects.slice(0, this.visibleLimit);
+    }
+
     setFilter(f: string): void {
         this.activeFilter = f;
+        this.showAll = false;
+    }
+
+    toggleShowAll(): void {
+        this.showAll = !this.showAll;
     }
 
     openProjectModal(p: IProject): void {
