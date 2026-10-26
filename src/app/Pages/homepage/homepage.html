@@ -6,9 +6,11 @@
             <div class="col-lg-6 animate-fade-in">
                 <p class="hero-badge">{{ heroData.badge }}</p>
                 <h1 class="hero-name">{{ heroData.name }}</h1>
-                <h2 class="hero-role text-gradient min-role-height">
-                    {{ displayedRole }}<span class="type-cursor">|</span>
-                </h2>
+                <div class="hero-role-wrapper">
+                    <h2 class="hero-role text-gradient">
+                        <span>{{ displayedRole }}</span><span class="type-cursor">|</span>
+                    </h2>
+                </div>
                 <p class="hero-desc">{{ heroData.description }}</p>
                 <div class="d-flex flex-wrap gap-3 mt-4">
                     <a routerLink="/portfolio" class="btn-primary-custom px-4 py-3">View My Work</a>
