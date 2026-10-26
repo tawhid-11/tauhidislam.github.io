@@ -1,9 +1,9 @@
 import { signalStore, withState, withMethods, patchState } from '@ngrx/signals';
 import { inject } from '@angular/core';
-import { ApiService } from '../services/api/api';
-import { IExperience } from '../interfaces/experience';
+import { ApiService } from '../Services/api/api';
+import { IExperience } from '../Interfaces/experience';
 import { lastValueFrom, map } from 'rxjs';
-import { sortByTenure } from '../helpers/sort-by-date';
+import { sortByTenure } from '../Helpers/sort-by-date';
 
 type ExperienceState = {
   experiences: IExperience[];
@@ -18,13 +18,13 @@ const initialState: ExperienceState = {
 export const ExperienceStore = signalStore(
   withState(initialState),
   withMethods((store, apiService = inject(ApiService)) => ({
-    async loadExperienceData(): Promise<void> {
+    async loadExperiences(): Promise<void> {
       patchState(store, { isLoading: true });
 
       const experiences = await lastValueFrom(
-        apiService.getExperiencesInfo().pipe(
-          map(res => Object.values(res) as IExperience[])
-        )
+        apiService
+          .getExperiences()
+          .pipe(map((response) => response.experiences))
       );
 
       const sortedExperiences = sortByTenure(experiences);
@@ -33,4 +33,3 @@ export const ExperienceStore = signalStore(
     },
   }))
 );
-

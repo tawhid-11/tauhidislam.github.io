@@ -1,7 +1,7 @@
 import { signalStore, withState, withMethods, patchState } from '@ngrx/signals';
 import { inject } from '@angular/core';
-import { ApiService } from '../services/api/api';
-import { IProject } from '../interfaces/project';
+import { ApiService } from '../Services/api/api';
+import { IProject } from '../Interfaces/project';
 import { lastValueFrom, map } from 'rxjs';
 
 type ProjectState = {
@@ -21,14 +21,12 @@ export const ProjectsStore = signalStore(
       patchState(store, { isLoading: true });
 
       const projects = await lastValueFrom(
-        apiService.getProjectsInfo().pipe(
-          map(res => Object.values(res) as IProject[])
-        )
+        apiService
+          .getProjects()
+          .pipe(map((response) => response.projects))
       );
 
       patchState(store, { projects, isLoading: false });
     },
   }))
 );
-
-
