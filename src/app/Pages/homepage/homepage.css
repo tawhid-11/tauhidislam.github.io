@@ -24,37 +24,12 @@
     margin-bottom: 0.5rem;
 }
 
-.hero-role-wrapper {
-    min-height: 4.5rem;
-    display: flex;
-    align-items: center;
-    margin-bottom: 1.25rem;
-}
-
-@media (min-width: 768px) {
-    .hero-role-wrapper {
-        min-height: 3.2rem;
-    }
-}
-
 .hero-role {
-    font-size: clamp(1.2rem, 2.5vw, 1.75rem);
+    font-size: clamp(1.2rem, 3vw, 1.8rem);
     font-family: 'Outfit', sans-serif;
     font-weight: 600;
-    margin-bottom: 0;
+    margin-bottom: 1.5rem;
     line-height: 1.35;
-}
-
-.type-cursor {
-    color: #22d3ee;
-    font-weight: 300;
-    margin-left: 2px;
-    animation: blink 0.9s infinite;
-}
-
-@keyframes blink {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0; }
 }
 
 .hero-desc {

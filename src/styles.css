@@ -11,6 +11,12 @@
     --font-body: 'Inter', sans-serif;
 }
 
+html {
+    overflow-y: scroll;
+    scrollbar-gutter: stable;
+    scroll-behavior: smooth;
+}
+
 body {
     font-family: 'Inter', sans-serif;
     background-color: var(--bg-primary);
@@ -73,13 +79,12 @@ h4,
 
 /* Animated Background Shapes */
 .blob {
-    position: absolute;
-    width: 500px;
-    height: 500px;
-    background: radial-gradient(circle, rgba(0, 242, 254, 0.15) 0%, rgba(79, 172, 254, 0) 70%);
-    filter: blur(60px);
+    position: fixed;
+    border-radius: 50%;
+    filter: blur(80px);
     z-index: -1;
     pointer-events: none;
+    will-change: transform;
 }
 
 /* Buttons */
