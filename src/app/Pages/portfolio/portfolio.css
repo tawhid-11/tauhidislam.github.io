@@ -1,276 +1,232 @@
-.section-padded {
-    padding: 6rem 0;
+/* ==========================================================================
+   PORTFOLIO PAGE STYLES · MAGENTA THEME
+   ========================================================================== */
+
+/* Filter Bar */
+.filter-chip {
+  background: rgba(22, 13, 29, 0.7);
+  border: 1px solid var(--magenta-border);
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 8px 20px;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.25s ease;
 }
 
-.section-badge {
-    font-size: 0.75rem;
-    font-weight: 700;
-    letter-spacing: 3px;
-    color: #0ea5e9;
-    margin-bottom: 0.75rem;
+.filter-chip:hover {
+  background: rgba(224, 0, 112, 0.15);
+  border-color: var(--magenta-bright);
+  color: #ffffff;
 }
 
-.section-title {
-    font-family: 'Outfit', sans-serif;
-    font-size: clamp(1.8rem, 4vw, 2.8rem);
-    font-weight: 800;
-    margin-bottom: 0.5rem;
+.filter-chip.active {
+  background: var(--magenta-gradient);
+  border-color: transparent;
+  color: #ffffff;
+  box-shadow: 0 4px 14px rgba(224, 0, 112, 0.35);
 }
 
-/* Filter bar */
-.filter-bar {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.75rem;
-    justify-content: center;
+/* Project Card */
+.project-showcase-card {
+  background: rgba(22, 13, 29, 0.75);
+  border-color: var(--magenta-border);
+  cursor: pointer;
+  overflow: hidden;
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.filter-btn {
-    background: rgba(255, 255, 255, 0.04);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    color: #94a3b8;
-    padding: 0.5rem 1.4rem;
-    border-radius: 30px;
-    font-size: 0.875rem;
-    font-weight: 500;
-    cursor: pointer;
-    transition: all 0.3s ease;
+.project-showcase-card:hover {
+  transform: translateY(-6px);
+  border-color: var(--magenta-bright);
+  box-shadow: var(--magenta-glow-md);
 }
 
-.filter-btn:hover {
-    border-color: #0ea5e9;
-    color: #0ea5e9;
+.card-thumb-wrapper {
+  position: relative;
+  height: 200px;
+  background: #0f0815;
+  overflow: hidden;
 }
 
-.filter-btn.active {
-    background: linear-gradient(135deg, #0ea5e9, #22d3ee);
-    border-color: transparent;
-    color: #000;
-    font-weight: 700;
+.card-thumb-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
 }
 
-/* Project card */
-.project-card {
-    transition: transform 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.35s;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
+.project-showcase-card:hover .card-thumb-img {
+  transform: scale(1.06);
 }
 
-.project-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 20px 40px rgba(14, 165, 233, 0.18);
+.thumb-badge {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  background: rgba(14, 8, 19, 0.85);
+  backdrop-filter: blur(8px);
+  border: 1px solid var(--magenta-border);
+  color: var(--magenta-bright);
+  font-size: 0.74rem;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 50px;
+  z-index: 2;
 }
 
-.project-title {
-    font-weight: 700;
-    font-size: 1.15rem;
+.thumb-hover-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(14, 7, 20, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 1;
 }
 
-.project-img-wrapper {
-    position: relative;
-    overflow: hidden;
-    height: 200px;
-    border-radius: 20px 20px 0 0;
+.project-showcase-card:hover .thumb-hover-overlay {
+  opacity: 1;
 }
 
-.project-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.5s ease;
+.overlay-pill {
+  background: var(--magenta-gradient);
+  color: #ffffff;
+  font-size: 0.8rem;
+  font-weight: 700;
+  padding: 8px 16px;
+  border-radius: 50px;
+  box-shadow: var(--magenta-glow-sm);
 }
 
-.project-card:hover .project-img {
-    transform: scale(1.05);
+.tech-pills-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
 }
 
-.project-overlay {
-    position: absolute;
-    inset: 0;
-    background: rgba(10, 10, 10, 0.75);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.75rem;
-    opacity: 0;
-    transition: opacity 0.3s ease;
+.tech-pill-item {
+  font-size: 0.72rem;
+  padding: 3px 9px;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text-secondary);
+  border: 1px solid var(--border-subtle);
 }
 
-.project-card:hover .project-overlay {
-    opacity: 1;
+.project-github-btn {
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: color 0.2s ease;
 }
 
-.overlay-btn {
-    background: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    color: #fff;
-    padding: 0.5rem 1.1rem;
-    border-radius: 30px;
-    text-decoration: none;
-    font-size: 0.85rem;
-    font-weight: 600;
-    transition: all 0.3s;
-    backdrop-filter: blur(4px);
-    cursor: pointer;
+.project-github-btn:hover {
+  color: var(--magenta-bright);
 }
 
-.overlay-btn:hover {
-    background: #0ea5e9;
-    border-color: #0ea5e9;
-    color: #000;
+.project-details-btn {
+  color: var(--magenta-bright);
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
 }
 
-.assoc-badge {
-    background: rgba(14, 165, 233, 0.1);
-    border: 1px solid rgba(14, 165, 233, 0.2);
-    color: #7dd3fc;
-    padding: 0.25rem 0.75rem;
-    border-radius: 20px;
-    font-size: 0.72rem;
-    white-space: nowrap;
-}
-
-.tech-pills {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.4rem;
-}
-
-.tech-pill {
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    color: #94a3b8;
-    padding: 0.2rem 0.65rem;
-    border-radius: 16px;
-    font-size: 0.72rem;
-}
-
-.tech-pill-more {
-    background: rgba(14, 165, 233, 0.1);
-    color: #38bdf8;
-    padding: 0.2rem 0.5rem;
-    border-radius: 16px;
-    font-size: 0.72rem;
-    font-weight: 600;
-}
-
-.tech-pill-modal {
-    background: rgba(14, 165, 233, 0.1);
-    border: 1px solid rgba(14, 165, 233, 0.25);
-    color: #7dd3fc;
-    padding: 0.35rem 0.9rem;
-    border-radius: 20px;
-    font-size: 0.82rem;
-    font-weight: 500;
-}
-
-.text-primary-custom {
-    color: #38bdf8;
-    transition: color 0.2s ease;
-}
-
-.project-card:hover .text-primary-custom {
-    color: #22d3ee;
-}
-
-.text-cyan {
-    color: #22d3ee;
-}
-
-/* ===== MODAL ===== */
+/* Project Modal */
 .project-modal-backdrop {
-    position: fixed;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.75);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-    z-index: 1050;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 1.5rem;
-    animation: fadeInModal 0.25s ease-out;
+  position: fixed;
+  inset: 0;
+  background: rgba(4, 2, 6, 0.85);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  z-index: 1060;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  animation: fadeIn 0.25s ease forwards;
 }
 
 .project-modal {
-    max-width: 720px;
-    width: 100%;
-    max-height: 88vh;
-    overflow-y: auto;
-    position: relative;
-    border-radius: 24px;
-    background: rgba(15, 23, 42, 0.95);
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6);
+  position: relative;
+  width: 100%;
+  max-width: 720px;
+  max-height: 90vh;
+  overflow-y: auto;
+  border: 1px solid var(--magenta-border-strong);
+  box-shadow: var(--magenta-glow-lg);
+  border-radius: 24px;
+  background: rgba(20, 11, 26, 0.95);
 }
 
-.modal-img-wrapper {
-    position: relative;
-    height: 220px;
-    overflow: hidden;
-    border-radius: 24px 24px 0 0;
+.modal-banner-box {
+  position: relative;
+  height: 240px;
+  background: #0f0815;
 }
 
 .modal-banner-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
-.modal-img-overlay {
-    position: absolute;
-    bottom: 1rem;
-    left: 1.5rem;
+.modal-banner-badge {
+  position: absolute;
+  bottom: 16px;
+  left: 20px;
+  background: rgba(14, 8, 19, 0.85);
+  backdrop-filter: blur(8px);
+  border: 1px solid var(--magenta-border);
+  color: var(--magenta-bright);
+  font-size: 0.78rem;
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: 50px;
 }
 
 .modal-close-btn {
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
-    width: 38px;
-    height: 38px;
-    border-radius: 50%;
-    background: rgba(0, 0, 0, 0.6);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    color: #fff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    z-index: 5;
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: rgba(14, 8, 19, 0.8);
+  backdrop-filter: blur(8px);
+  border: 1px solid var(--magenta-border);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10;
+  transition: all 0.2s ease;
 }
 
 .modal-close-btn:hover {
-    background: #ef4444;
-    border-color: #ef4444;
-    transform: rotate(90deg);
+  background: var(--magenta-primary);
+  border-color: transparent;
 }
 
-.feature-list {
-    list-style: none;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 0.6rem;
+.letter-spacing-1 {
+  letter-spacing: 0.08em;
 }
 
-.feature-list li {
-    display: flex;
-    align-items: flex-start;
-    color: #cbd5e1;
-    font-size: 0.92rem;
-    line-height: 1.6;
+.modal-tech-tag {
+  font-size: 0.78rem;
+  font-weight: 600;
+  padding: 4px 12px;
+  border-radius: 50px;
+  background: rgba(224, 0, 112, 0.1);
+  border: 1px solid var(--magenta-border);
+  color: var(--magenta-bright);
 }
 
-@keyframes fadeInModal {
-    from {
-        opacity: 0;
-        transform: scale(0.96);
-    }
-    to {
-        opacity: 1;
-        transform: scale(1);
-    }
+.text-magenta {
+  color: var(--magenta-bright);
 }
