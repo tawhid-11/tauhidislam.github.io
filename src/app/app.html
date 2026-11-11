@@ -1,8 +1,8 @@
 <!-- Interactive Magenta Atmosphere & Particle Mesh -->
 <app-background-animation></app-background-animation>
 
-<!-- Global Glass Navbar -->
-<nav class="glass-nav navbar navbar-expand-lg sticky-top">
+<!-- Global Glass Navbar (Always Fixed at Top) -->
+<nav class="glass-nav navbar navbar-expand-lg fixed-top">
   <div class="container">
     <a class="navbar-brand d-flex align-items-center gap-2" routerLink="/" (click)="closeMenu()">
       <span class="brand-badge">&lt;/&gt;</span>
@@ -188,7 +188,7 @@
             <input
               type="text"
               class="form-control-custom"
-              placeholder="e.g. Alex Johnson"
+              placeholder="e.g. Tawhid Islam"
               [(ngModel)]="contactForm.name"
               name="name"
               required
@@ -199,7 +199,7 @@
             <input
               type="email"
               class="form-control-custom"
-              placeholder="alex@company.com"
+              placeholder="gsa@company.com"
               [(ngModel)]="contactForm.email"
               name="email"
               required
