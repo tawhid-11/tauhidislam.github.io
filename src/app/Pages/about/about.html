@@ -1,84 +1,138 @@
-<!-- ===== ABOUT HERO ===== -->
-<section class="about-hero section-padded">
-    <div class="container">
-        <div class="row g-5 align-items-center">
-            <!-- Image & Contact -->
-            <div class="col-lg-4 text-center animate-fade-in">
-                <div class="about-img-wrapper">
-                    <img [src]="profile.image" [alt]="profile.name" class="about-img"
-                        onerror="this.src='assets/img/placeholder-img.jpeg'">
-                    <div class="about-img-ring"></div>
-                </div>
-                <!-- Contact Info -->
-                <div class="contact-pills mt-4">
-                    <a *ngFor="let c of contact" [href]="c.link || 'javascript:void(0)'"
-                        [target]="c.link ? '_blank' : '_self'" class="contact-pill">
-                        <i [class]="c.icon + ' me-2 text-gradient'"></i>
-                        <span class="text-truncate">{{ c.value }}</span>
-                    </a>
-                    <button class="contact-pill border-0 text-start w-100" (click)="copyEmail()" style="cursor: pointer;">
-                        <i [class]="emailCopied ? 'fa-solid fa-check text-success me-2' : 'fa-regular fa-copy text-gradient me-2'"></i>
-                        <span>{{ emailCopied ? 'Email Copied to Clipboard!' : 'Click to Copy Email' }}</span>
-                    </button>
-                </div>
-            </div>
+<!-- ==========================================================================
+     ABOUT HERO & PROFILE
+     ========================================================================== -->
+<section class="section-padded">
+  <div class="container">
+    <div class="row g-5 align-items-center">
+      <!-- Profile Card / Image -->
+      <div class="col-lg-4 text-center animate-fade-in">
+        <div class="about-card glass-panel p-4">
+          <div class="about-avatar-wrapper mx-auto mb-4">
+            <img
+              [src]="profile.image"
+              [alt]="profile.name"
+              class="about-avatar-img"
+              onerror="this.src='assets/img/sportshub.png'"
+            />
+            <div class="about-ring"></div>
+          </div>
 
-            <!-- Bio -->
-            <div class="col-lg-8 animate-fade-in" style="animation-delay:0.2s">
-                <p class="section-badge">ABOUT ME</p>
-                <h1 class="section-title text-white">{{ profile.name }}</h1>
-                <h4 class="text-gradient mb-4">{{ profile.role }} · {{ profile.location }}</h4>
-                <p class="text-secondary fs-6 lh-lg mb-3">{{ profile.bio }}</p>
-                <p class="text-secondary fs-6 lh-lg">{{ profile.bio2 }}</p>
-                <div class="d-flex gap-3 mt-4 flex-wrap">
-                    <a routerLink="/experience" class="btn-primary-custom px-4 py-3">View Experience</a>
-                    <a routerLink="/portfolio" class="btn-outline-custom px-4 py-3">See My Work</a>
-                    <a href="assets/my-cv.pdf" target="_blank" class="btn-outline-custom px-4 py-3 text-decoration-none">
-                        <i class="fa-solid fa-file-pdf me-2"></i>Download CV
-                    </a>
-                </div>
-            </div>
+          <h3 class="text-white fw-bold mb-1 fs-4">{{ profile.name }}</h3>
+          <p class="text-gradient small fw-semibold mb-3">{{ profile.role }}</p>
+
+          <div class="d-flex align-items-center justify-content-center gap-2 text-muted small mb-4">
+            <i class="fa-solid fa-location-dot text-magenta"></i>
+            <span>{{ profile.location }}</span>
+          </div>
+
+          <!-- Contact Quick Buttons -->
+          <div class="contact-pill-list">
+            <a
+              *ngFor="let c of contact"
+              [href]="c.link || 'javascript:void(0)'"
+              [target]="c.link ? '_blank' : '_self'"
+              rel="noopener noreferrer"
+              class="about-contact-pill"
+            >
+              <i [class]="c.icon + ' text-magenta me-2'"></i>
+              <span class="text-truncate">{{ c.value }}</span>
+            </a>
+
+            <button class="about-contact-pill copy-btn w-100 border-0" type="button" (click)="copyEmail()">
+              <i [class]="emailCopied() ? 'fa-solid fa-check text-magenta me-2' : 'fa-regular fa-copy text-magenta me-2'"></i>
+              <span>{{ emailCopied() ? 'Email Copied!' : 'Click to Copy Email' }}</span>
+            </button>
+          </div>
         </div>
+      </div>
+
+      <!-- Narrative & Background -->
+      <div class="col-lg-8 animate-fade-in" style="animation-delay: 0.15s">
+        <span class="section-badge">ABOUT ME</span>
+        <h1 class="section-title text-white mb-2">{{ profile.name }}</h1>
+        <h3 class="text-gradient fs-4 mb-4 fw-bold">{{ profile.role }}</h3>
+
+        <div class="bio-text mb-4">
+          <p class="text-secondary fs-6 lh-lg mb-3">
+            {{ profile.bio }}
+          </p>
+          <p class="text-secondary fs-6 lh-lg mb-0">
+            {{ profile.bio2 }}
+          </p>
+        </div>
+
+        <div class="d-flex gap-3 flex-wrap pt-2">
+          <a routerLink="/experience" class="btn-primary-custom">
+            <span>Career Experience</span>
+            <i class="fa-solid fa-briefcase"></i>
+          </a>
+          <a routerLink="/portfolio" class="btn-outline-custom">
+            <span>Explore Projects</span>
+            <i class="fa-solid fa-arrow-right"></i>
+          </a>
+          <a href="assets/my-cv.pdf" download="Md_Tauhid_Islam_CV.pdf" target="_blank" rel="noopener noreferrer" class="btn-outline-custom">
+            <i class="fa-solid fa-file-pdf"></i>
+            <span>Download CV</span>
+          </a>
+        </div>
+      </div>
     </div>
+  </div>
 </section>
 
-<!-- ===== TECH STACK ===== -->
-<section class="section-padded" style="padding-top:0">
-    <div class="container">
-        <div class="section-header text-center mb-5">
-            <p class="section-badge">CORE CAPABILITIES</p>
-            <h2 class="section-title text-white">My Tech Stack &amp; Tools</h2>
-            <p class="text-secondary">Languages, frameworks, databases, and architectural patterns</p>
-        </div>
-        <div class="tech-tags">
-            <span *ngFor="let tech of techStack" class="tech-tag">{{ tech }}</span>
-        </div>
+<!-- ==========================================================================
+     TECH STACK & CORE TOOLING
+     ========================================================================== -->
+<section class="section-padded pt-0">
+  <div class="container">
+    <div class="text-center mb-5">
+      <span class="section-badge">ARSENAL</span>
+      <h2 class="section-title text-white">Technologies &amp; Architecture</h2>
+      <p class="section-sub">Every technology here is one I write and debug in production, not just list on paper.</p>
     </div>
+
+    <div class="glass-panel p-4 p-md-5">
+      <div class="tech-badge-container">
+        <div class="tech-chip" *ngFor="let tech of techStack">
+          <i class="fa-solid fa-check-double text-magenta me-2"></i>
+          <span>{{ tech }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
 
-<!-- ===== EDUCATION ===== -->
-<section class="section-padded" style="padding-top:0">
-    <div class="container">
-        <div class="section-header text-center mb-5">
-            <p class="section-badge">ACADEMIC BACKGROUND</p>
-            <h2 class="section-title text-white">Education</h2>
-            <p class="text-secondary">Academic journey and foundational computer science training</p>
-        </div>
-        <div class="row justify-content-center">
-            <div class="col-lg-8 mb-4" *ngFor="let edu of education">
-                <div class="glass-panel p-4 h-100">
-                    <div class="d-flex align-items-center gap-3">
-                        <div class="edu-icon">
-                            <i class="fa-solid fa-graduation-cap text-gradient fs-2"></i>
-                        </div>
-                        <div>
-                            <h5 class="text-white mb-1 fw-bold">{{ edu.degree }}</h5>
-                            <p class="text-gradient mb-1 fw-medium">{{ edu.institution }}</p>
-                            <p class="text-secondary small mb-0">{{ edu.year }} · <span class="badge bg-secondary-subtle text-cyan">{{ edu.grade }}</span></p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+<!-- ==========================================================================
+     ACADEMIC BACKGROUND
+     ========================================================================== -->
+<section class="section-padded pt-0">
+  <div class="container">
+    <div class="text-center mb-5">
+      <span class="section-badge">EDUCATION</span>
+      <h2 class="section-title text-white">Academic Foundation</h2>
+      <p class="section-sub">Computer Science education with top academic marks and rigorous computer systems training.</p>
     </div>
+
+    <div class="row justify-content-center g-4">
+      <div class="col-lg-8" *ngFor="let edu of education">
+        <div class="education-card glass-panel p-4">
+          <div class="d-flex align-items-center gap-3">
+            <div class="edu-icon-box">
+              <i class="fa-solid fa-graduation-cap"></i>
+            </div>
+            <div class="flex-grow-1">
+              <div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-1">
+                <h4 class="text-white mb-0 fw-bold fs-5">{{ edu.degree }}</h4>
+                <span class="grade-badge">{{ edu.grade }}</span>
+              </div>
+              <p class="text-gradient small fw-semibold mb-1">{{ edu.institution }}</p>
+              <p class="text-muted small mb-0">
+                <i class="fa-regular fa-calendar me-1"></i>{{ edu.year }}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
