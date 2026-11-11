@@ -98,8 +98,8 @@ export const PORTFOLIO_DATA = {
   ] as IStat[],
 
   expertise: [
-    { title: 'Angular', icon: 'fa-brands fa-angular', desc: 'Angular 17/18/19, TypeScript, Signals, RxJS, Responsive UI & Bootstrap 5', color: '#dd0031' },
-    { title: 'ASP.NET Core', icon: 'fa-brands fa-dot-net', desc: 'RESTful Web APIs, C#, Clean Architecture, CQRS, MediatR, Entity Framework Core, Dapper', color: '#68a063' },
+    { title: 'Angular', icon: 'devicon-angularjs-plain', desc: 'Angular 17/18/19, TypeScript, Signals, RxJS, Responsive UI & Bootstrap 5', color: '#dd0031' },
+    { title: 'ASP.NET Core', icon: 'devicon-dotnetcore-plain', desc: 'RESTful Web APIs, C#, Clean Architecture, CQRS, MediatR, Entity Framework Core, Dapper', color: '#68a063' },
     { title: 'TypeScript & JavaScript', icon: 'fa-brands fa-js', desc: 'Strict Typing, Modern ES6+, Design Patterns, Clean & Scalable Code', color: '#007acc' },
     { title: 'Database & SQL', icon: 'fa-solid fa-database', desc: 'Microsoft SQL Server, PostgreSQL, Schema Design, Stored Procedures, Optimization', color: '#f59e0b' },
     { title: 'Real-Time & Integration', icon: 'fa-solid fa-bolt', desc: 'SignalR WebSockets, Background Services, bKash Payment Gateway, Third-party APIs', color: '#a78bfa' },
