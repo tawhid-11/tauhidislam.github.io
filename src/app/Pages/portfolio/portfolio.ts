@@ -1,56 +1,50 @@
-import { Component, HostListener } from '@angular/core';
+import { Component, HostListener, computed, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PORTFOLIO_DATA, IProject } from '../../data/portfolio-data';
 
 @Component({
-    selector: 'app-portfolio',
-    standalone: true,
-    imports: [CommonModule],
-    templateUrl: './portfolio.html',
-    styleUrl: './portfolio.css'
+  selector: 'app-portfolio',
+  standalone: true,
+  imports: [CommonModule],
+  templateUrl: './portfolio.html',
+  styleUrl: './portfolio.css'
 })
 export class PortfolioComponent {
-    filters = ['All', 'Full-Stack', 'Frontend', 'Backend', 'Angular', 'ASP.NET Core'];
-    activeFilter = 'All';
+  readonly filters = ['All', 'Full-Stack', 'Backend', 'Frontend', 'Angular', 'ASP.NET Core'];
+  readonly allProjects: IProject[] = PORTFOLIO_DATA.projects;
 
-    allProjects = PORTFOLIO_DATA.projects;
-    selectedProject: IProject | null = null;
-    visibleLimit = 6;
-    showAll = false;
+  activeFilter = signal<string>('All');
+  selectedProject = signal<IProject | null>(null);
 
-    get filteredProjects(): IProject[] {
-        if (this.activeFilter === 'All') return this.allProjects;
-        return this.allProjects.filter(p => p.tags.includes(this.activeFilter));
+  filteredProjects = computed<IProject[]>(() => {
+    const filter = this.activeFilter();
+    if (filter === 'All') {
+      return this.allProjects;
     }
+    return this.allProjects.filter(p =>
+      p.tags.some(tag => tag.toLowerCase() === filter.toLowerCase()) ||
+      p.tech.some(t => t.toLowerCase().includes(filter.toLowerCase()))
+    );
+  });
 
-    get displayedProjects(): IProject[] {
-        if (this.showAll) return this.filteredProjects;
-        return this.filteredProjects.slice(0, this.visibleLimit);
-    }
+  setFilter(filter: string): void {
+    this.activeFilter.set(filter);
+  }
 
-    setFilter(f: string): void {
-        this.activeFilter = f;
-        this.showAll = false;
-    }
+  openProjectModal(project: IProject): void {
+    this.selectedProject.set(project);
+    document.body.style.overflow = 'hidden';
+  }
 
-    toggleShowAll(): void {
-        this.showAll = !this.showAll;
-    }
+  closeProjectModal(): void {
+    this.selectedProject.set(null);
+    document.body.style.overflow = 'auto';
+  }
 
-    openProjectModal(p: IProject): void {
-        this.selectedProject = p;
-        document.body.style.overflow = 'hidden';
+  @HostListener('document:keydown.escape')
+  onEscape(): void {
+    if (this.selectedProject()) {
+      this.closeProjectModal();
     }
-
-    closeProjectModal(): void {
-        this.selectedProject = null;
-        document.body.style.overflow = 'auto';
-    }
-
-    @HostListener('document:keydown.escape')
-    onEscape(): void {
-        if (this.selectedProject) {
-            this.closeProjectModal();
-        }
-    }
+  }
 }
