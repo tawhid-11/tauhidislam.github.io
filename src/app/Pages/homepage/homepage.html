@@ -1,168 +1,282 @@
-<!-- ===== HERO ===== -->
+<!-- ==========================================================================
+     HERO SECTION
+     ========================================================================== -->
 <section class="hero-section">
-    <div class="container">
-        <div class="row align-items-center g-5">
-            <!-- Text -->
-            <div class="col-lg-6 animate-fade-in">
-                <p class="hero-badge">{{ heroData.badge }}</p>
-                <h1 class="hero-name">{{ heroData.name }}</h1>
-                <h2 class="hero-role text-gradient mb-3">{{ heroData.role }}</h2>
-                <p class="hero-desc">{{ heroData.description }}</p>
-                <div class="d-flex flex-wrap gap-3 mt-4">
-                    <a routerLink="/portfolio" class="btn-primary-custom px-4 py-3">View My Work</a>
-                    <a routerLink="/about" class="btn-outline-custom px-4 py-3">About Me</a>
-                    <a href="assets/my-cv.pdf" target="_blank"
-                        class="btn-outline-custom px-4 py-3 text-decoration-none">
-                        <i class="fa-solid fa-eye me-2"></i>View CV
-                    </a>
-                </div>
-                <!-- Social Links & Quick Contact -->
-                <div class="d-flex align-items-center gap-3 mt-5 flex-wrap">
-                    <div class="hero-socials">
-                        <a href="https://github.com/tawhid-11" target="_blank" class="social-icon" title="GitHub"><i
-                                class="fa-brands fa-github"></i></a>
-                        <a href="https://www.linkedin.com/in/md-tauhid-islam-146406240" target="_blank"
-                            class="social-icon" title="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
-                        <a href="https://www.facebook.com/share/1E8XRLaPn3/" target="_blank" class="social-icon" title="Facebook"><i
-                                class="fa-brands fa-facebook"></i></a>
-                    </div>
-                    <button class="quick-copy-btn" (click)="copyEmail()" title="Copy Email">
-                        <i [class]="emailCopied ? 'fa-solid fa-check text-success me-2' : 'fa-regular fa-copy me-2'"></i>
-                        <span>{{ emailCopied ? 'Copied!' : 'Copy Email' }}</span>
-                    </button>
-                </div>
-            </div>
-            <!-- Profile Card -->
-            <div class="col-lg-6 text-center animate-fade-in" style="animation-delay:0.3s">
-                <div class="profile-card glass-panel p-4">
-                    <div class="profile-img-wrapper mx-auto mb-4">
-                        <img [src]="heroData.image" alt="Profile Photo" class="profile-img"
-                            onerror="this.src='assets/img/placeholder-img.jpeg'">
-                        <div class="online-dot" title="Available for opportunities"></div>
-                    </div>
-                    <h4 class="text-white mb-1">{{ heroData.name }}</h4>
-                    <p class="text-gradient mb-3">{{ heroData.role }}</p>
-                    <div class="tag-row">
-                        <span class="skill-tag">Angular</span>
-                        <span class="skill-tag">ASP.NET Core</span>
-                        <span class="skill-tag">Clean Architecture</span>
-                        <span class="skill-tag">SQL Server</span>
-                        <span class="skill-tag">SignalR</span>
-                    </div>
-                </div>
-            </div>
+  <div class="container">
+    <div class="row align-items-center g-5">
+      <!-- Left Column: Introduction & CTAs -->
+      <div class="col-lg-7 animate-fade-in">
+        <div class="status-pill mb-3">
+          <span class="pulsing-magenta-dot"></span>
+          <span>AVAILABLE FOR FULL-STACK &amp; BACKEND ROLES</span>
         </div>
+
+        <h1 class="hero-title">
+          Hi, I'm <span class="text-white">{{ heroData.name }}</span>
+        </h1>
+
+        <!-- Role with Magenta Transition -->
+        <div class="hero-role-wrapper mb-3">
+          <span class="text-gradient hero-role">{{ displayedRole() }}</span>
+        </div>
+
+        <p class="hero-description mb-4">
+          {{ heroData.description }}
+        </p>
+
+        <!-- CTA Action Buttons -->
+        <div class="d-flex flex-wrap gap-3 mb-5">
+          <a routerLink="/portfolio" class="btn-primary-custom">
+            <span>Explore Projects</span>
+            <i class="fa-solid fa-arrow-right"></i>
+          </a>
+          <a href="assets/my-cv.pdf" download="Md_Tauhid_Islam_CV.pdf" target="_blank" rel="noopener noreferrer" class="btn-outline-custom">
+            <i class="fa-solid fa-file-arrow-down"></i>
+            <span>Download CV</span>
+          </a>
+          <a routerLink="/about" class="btn-outline-custom">
+            <i class="fa-solid fa-user-tie"></i>
+            <span>About Me</span>
+          </a>
+        </div>
+
+        <!-- Social Channels & Fast Email Copy -->
+        <div class="d-flex align-items-center gap-3 flex-wrap">
+          <div class="hero-social-strip d-flex gap-2">
+            <a href="https://github.com/tawhid-11" target="_blank" rel="noopener noreferrer" class="hero-social-btn" title="GitHub">
+              <i class="fa-brands fa-github"></i>
+            </a>
+            <a href="https://www.linkedin.com/in/md-tauhid-islam-146406240" target="_blank" rel="noopener noreferrer" class="hero-social-btn" title="LinkedIn">
+              <i class="fa-brands fa-linkedin-in"></i>
+            </a>
+            <a href="https://www.facebook.com/share/1E8XRLaPn3/" target="_blank" rel="noopener noreferrer" class="hero-social-btn" title="Facebook">
+              <i class="fa-brands fa-facebook"></i>
+            </a>
+          </div>
+
+          <button class="quick-email-pill" type="button" (click)="copyEmail()" title="Click to copy email">
+            <i [class]="emailCopied() ? 'fa-solid fa-check text-magenta' : 'fa-regular fa-copy'"></i>
+            <span>{{ emailCopied() ? 'Email Copied!' : 'tshakib25@gmail.com' }}</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Right Column: Human-crafted Profile Card -->
+      <div class="col-lg-5 text-center animate-fade-in" style="animation-delay: 0.2s">
+        <div class="profile-card glass-panel p-4 p-md-5">
+          <div class="avatar-container mx-auto mb-4">
+            <img
+              [src]="heroData.image"
+              [alt]="heroData.name"
+              class="avatar-image"
+              onerror="this.src='assets/img/sportshub.png'"
+            />
+            <div class="avatar-ring"></div>
+            <div class="avatar-badge" title="Active & Ready">
+              <i class="fa-solid fa-bolt"></i>
+            </div>
+          </div>
+
+          <h3 class="text-white fw-bold mb-1 fs-4">{{ heroData.name }}</h3>
+          <p class="text-gradient small fw-semibold mb-3">Full-Stack &amp; Clean Architecture Specialist</p>
+
+          <p class="text-secondary small mb-4 lh-base">
+            Focused on robust ASP.NET Core APIs, responsive Angular SPAs, and optimized SQL schemas.
+          </p>
+
+          <div class="tech-pill-grid">
+            <span class="tech-tag-sm">Angular 19</span>
+            <span class="tech-tag-sm">ASP.NET Core</span>
+            <span class="tech-tag-sm">C#</span>
+            <span class="tech-tag-sm">Clean Arch</span>
+            <span class="tech-tag-sm">SQL Server</span>
+            <span class="tech-tag-sm">SignalR</span>
+          </div>
+        </div>
+      </div>
     </div>
+  </div>
 </section>
 
-<!-- ===== STATS ===== -->
-<section class="stats-section">
-    <div class="container">
-        <div class="stats-grid">
-            <div class="stat-item" *ngFor="let stat of stats">
-                <h3 class="stat-value text-gradient">{{ stat.value }}</h3>
-                <p class="stat-label">{{ stat.label }}</p>
-            </div>
+<!-- ==========================================================================
+     STATS BAR
+     ========================================================================== -->
+<section class="stats-section py-4">
+  <div class="container">
+    <div class="stats-card glass-panel p-4">
+      <div class="row g-4 text-center">
+        <div class="col-6 col-md-3" *ngFor="let s of stats">
+          <div class="stat-unit">
+            <div class="stat-number text-gradient">{{ s.value }}</div>
+            <div class="stat-title">{{ s.label }}</div>
+          </div>
         </div>
+      </div>
     </div>
+  </div>
 </section>
 
-<!-- ===== EXPERTISE ===== -->
-<section id="skills" class="section-padded">
-    <div class="container">
-        <div class="section-header text-center mb-5">
-            <p class="section-badge">EXPERTISE</p>
-            <h2 class="section-title text-white">Technical Skills</h2>
-            <p class="section-sub">Modern technologies & architectures I leverage to build robust software</p>
-        </div>
-        <div class="row g-4">
-            <div class="col-lg-4 col-md-6" *ngFor="let item of expertise">
-                <div class="skill-card glass-panel p-4">
-                    <div class="skill-icon mb-3">
-                        <i [class]="item.icon" [style.color]="item.color"></i>
-                    </div>
-                    <h5 class="text-white mb-2">{{ item.title }}</h5>
-                    <p class="text-secondary small mb-0 lh-base">{{ item.desc }}</p>
-                </div>
-            </div>
-        </div>
+<!-- ==========================================================================
+     FEATURED WORK PREVIEW
+     ========================================================================== -->
+<section class="section-padded">
+  <div class="container">
+    <div class="d-flex flex-wrap justify-content-between align-items-end mb-5 gap-3">
+      <div>
+        <span class="section-badge">FEATURED ARCHITECTURE</span>
+        <h2 class="section-title text-white mb-2">Flagship Projects</h2>
+        <p class="section-sub text-start mb-0">
+          Real-world applications engineered with clean boundaries and modern frameworks.
+        </p>
+      </div>
+      <div>
+        <a routerLink="/portfolio" class="btn-outline-custom">
+          <span>View All Projects</span>
+          <i class="fa-solid fa-arrow-right"></i>
+        </a>
+      </div>
     </div>
-</section>
 
-<!-- ===== PHILOSOPHY ===== -->
-<section class="philosophy-section section-padded">
-    <div class="container">
-        <div class="row g-5 align-items-center">
-            <div class="col-lg-6">
-                <p class="section-badge">HOW I WORK</p>
-                <h2 class="section-title text-white mb-4">Engineering Philosophy</h2>
-                <p class="text-secondary mb-4">
-                    I believe great software is at the intersection of elegant architecture, clean code, and outstanding user experience.
-                    Every component is crafted with performance, scalability, and maintainability in mind.
-                </p>
-                <ul class="philosophy-list">
-                    <li *ngFor="let point of philosophyPoints">
-                        <i class="fa-solid fa-circle-check text-gradient me-3"></i>
-                        <span class="text-secondary">{{ point }}</span>
-                    </li>
-                </ul>
-                <a routerLink="/experience" class="btn-primary-custom px-4 py-3 mt-4 d-inline-block">My Experience</a>
-            </div>
-            <div class="col-lg-6">
-                <div class="glass-panel p-5">
-                    <div class="row g-4 text-center">
-                        <div class="col-6">
-                            <div class="mini-stat">
-                                <i class="fa-solid fa-code text-gradient fs-2 mb-2"></i>
-                                <h4 class="text-white">100K+</h4>
-                                <p class="text-secondary small">Lines of Code</p>
-                            </div>
-                        </div>
-                        <div class="col-6">
-                            <div class="mini-stat">
-                                <i class="fa-solid fa-star text-gradient fs-2 mb-2"></i>
-                                <h4 class="text-white">5.0 / 5</h4>
-                                <p class="text-secondary small">Code Quality</p>
-                            </div>
-                        </div>
-                        <div class="col-6">
-                            <div class="mini-stat">
-                                <i class="fa-solid fa-clock text-gradient fs-2 mb-2"></i>
-                                <h4 class="text-white">&lt; 24h</h4>
-                                <p class="text-secondary small">Response Time</p>
-                            </div>
-                        </div>
-                        <div class="col-6">
-                            <div class="mini-stat">
-                                <i class="fa-solid fa-shield-halved text-gradient fs-2 mb-2"></i>
-                                <h4 class="text-white">100%</h4>
-                                <p class="text-secondary small">Clean Architecture</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
+    <div class="row g-4">
+      <div class="col-lg-4 col-md-6" *ngFor="let p of featuredProjects">
+        <div class="project-spotlight-card glass-panel h-100 d-flex flex-column">
+          <div class="spotlight-img-box">
+            <img [src]="p.imgUrl" [alt]="p.name" class="spotlight-img" onerror="this.src='assets/img/sportshub.png'" />
+            <div class="spotlight-tag">{{ p.associationWith }}</div>
+          </div>
 
-<!-- ===== CTA ===== -->
-<section class="cta-section section-padded">
-    <div class="container">
-        <div class="cta-box glass-panel p-5 text-center">
-            <h2 class="text-white mb-3">Ready to build something exceptional?</h2>
-            <p class="text-secondary mb-4">Let's collaborate and turn innovative ideas into scalable reality.</p>
-            <div class="d-flex justify-content-center gap-3 flex-wrap align-items-center">
-                <a routerLink="/portfolio" class="btn-primary-custom px-5 py-3">View Projects</a>
-                <button (click)="copyEmail()" class="btn-outline-custom px-4 py-3 border-0 bg-secondary-subtle text-white">
-                    <i [class]="emailCopied ? 'fa-solid fa-check text-success me-2' : 'fa-regular fa-copy me-2'"></i>
-                    {{ emailCopied ? 'Email Copied!' : 'Copy Email' }}
-                </button>
-                <a (click)="openEmail()" style="cursor: pointer;"
-                    class="btn-outline-custom text-decoration-none px-4 py-3">
-                    <i class="fa-solid fa-paper-plane me-2"></i>Get In Touch
+          <div class="p-4 d-flex flex-column flex-grow-1 justify-content-between">
+            <div>
+              <div class="d-flex justify-content-between align-items-center mb-1">
+                <h4 class="text-white fw-bold mb-0 fs-5">{{ p.name }}</h4>
+              </div>
+              <p class="text-gradient small fw-semibold mb-2">{{ p.role }}</p>
+              <p class="text-secondary small mb-3 lh-base">{{ p.desc }}</p>
+            </div>
+
+            <div>
+              <div class="tech-pills-row mb-3">
+                <span *ngFor="let t of p.tech.slice(0, 3)" class="tech-pill-micro">{{ t }}</span>
+                <span *ngIf="p.tech.length > 3" class="tech-pill-micro text-magenta">+{{ p.tech.length - 3 }}</span>
+              </div>
+
+              <div class="d-flex justify-content-between align-items-center pt-2 border-top border-dark-subtle">
+                <a [href]="p.github" target="_blank" rel="noopener noreferrer" class="code-link" (click)="$event.stopPropagation()">
+                  <i class="fa-brands fa-github me-1"></i>
+                  <span>GitHub Repository</span>
                 </a>
+                <a routerLink="/portfolio" class="details-link">
+                  <span>Architecture</span>
+                  <i class="fa-solid fa-chevron-right ms-1"></i>
+                </a>
+              </div>
             </div>
+          </div>
         </div>
+      </div>
     </div>
+  </div>
+</section>
+
+<!-- ==========================================================================
+     TECHNICAL EXPERTISE
+     ========================================================================== -->
+<section class="section-padded expertise-section">
+  <div class="container">
+    <div class="text-center mb-5">
+      <span class="section-badge">CORE COMPETENCIES</span>
+      <h2 class="section-title text-white">Engineering Expertise</h2>
+      <p class="section-sub">
+        Tools and architectural patterns honed through real projects and continuous practice.
+      </p>
+    </div>
+
+    <div class="row g-4">
+      <div class="col-lg-4 col-md-6" *ngFor="let item of expertise">
+        <div class="competency-card glass-panel p-4 h-100">
+          <div class="competency-icon mb-3">
+            <i [class]="item.icon"></i>
+          </div>
+          <h4 class="text-white fw-bold mb-2 fs-5">{{ item.title }}</h4>
+          <p class="text-secondary small mb-0 lh-base">{{ item.desc }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==========================================================================
+     ENGINEERING PHILOSOPHY
+     ========================================================================== -->
+<section class="section-padded">
+  <div class="container">
+    <div class="row g-5 align-items-center">
+      <div class="col-lg-6">
+        <span class="section-badge">CRAFTSMANSHIP</span>
+        <h2 class="section-title text-white mb-3">How I Approach Software</h2>
+        <p class="text-secondary mb-4 lh-lg">
+          I treat software engineering not as typing syntax, but as designing robust systems that can evolve
+          comfortably over years. Maintainable architecture and clear domain logic always beat clever shortcuts.
+        </p>
+
+        <div class="philosophy-stack">
+          <div class="philosophy-item d-flex gap-3 mb-3" *ngFor="let point of philosophyPoints">
+            <div class="phil-check"><i class="fa-solid fa-check"></i></div>
+            <p class="text-secondary small mb-0 fw-medium pt-1">{{ point }}</p>
+          </div>
+        </div>
+
+        <div class="mt-4">
+          <a routerLink="/experience" class="btn-primary-custom">
+            <span>View Career Journey</span>
+            <i class="fa-solid fa-briefcase"></i>
+          </a>
+        </div>
+      </div>
+
+      <div class="col-lg-6">
+        <div class="quote-card glass-panel p-4 p-md-5">
+          <i class="fa-solid fa-quote-left text-gradient fs-1 mb-3 d-block"></i>
+          <p class="text-white fs-5 fw-medium lh-base mb-4 font-heading">
+            "Simple things should be simple, complex things should be possible. Clean architecture is what keeps
+            systems alive when business complexity explodes."
+          </p>
+          <div class="d-flex align-items-center gap-3">
+            <div class="quote-avatar">
+              <img [src]="heroData.image" [alt]="heroData.name" onerror="this.src='assets/img/sportshub.png'" />
+            </div>
+            <div>
+              <div class="text-white fw-bold">{{ heroData.name }}</div>
+              <div class="text-gradient small">Full Stack Software Engineer</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==========================================================================
+     CALL TO ACTION STRIP
+     ========================================================================== -->
+<section class="py-5">
+  <div class="container">
+    <div class="cta-banner glass-panel p-4 p-md-5 text-center">
+      <span class="section-badge mb-2">LET'S COLLABORATE</span>
+      <h2 class="text-white fw-bold mb-3">Have an Exciting Opportunity or Project?</h2>
+      <p class="text-secondary small mb-4 mx-auto" style="max-width: 580px;">
+        Whether you are building a new enterprise API, architecting an Angular frontend, or hiring a dedicated engineer, I'm ready to contribute.
+      </p>
+      <div class="d-flex justify-content-center gap-3 flex-wrap">
+        <a href="mailto:tshakib25@gmail.com" class="btn-primary-custom">
+          <i class="fa-solid fa-envelope"></i>
+          <span>Send an Email</span>
+        </a>
+        <a href="https://github.com/tawhid-11" target="_blank" rel="noopener noreferrer" class="btn-outline-custom">
+          <i class="fa-brands fa-github"></i>
+          <span>Browse GitHub</span>
+        </a>
+      </div>
+    </div>
+  </div>
 </section>
