@@ -1,0 +1,119 @@
+/* ==========================================================================
+   DYNAMIC BACKGROUND ANIMATION · VIBRANT MAGENTA NEBULA
+   Ultra 60fps, GPU Accelerated, Zero Layout Shifts, Rich & Alive
+   ========================================================================== */
+
+.bg-animation-container {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+  background: radial-gradient(circle at 50% 30%, #15071f 0%, #0c0413 50%, #060209 100%);
+}
+
+/* 1. Dynamic Aurora Gradient Clouds */
+.aurora-layer {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(100px);
+  will-change: transform, opacity;
+  pointer-events: none;
+  mix-blend-mode: screen;
+}
+
+/* Top-Left Electric Magenta Nebula */
+.aurora-blob-1 {
+  width: 750px;
+  height: 750px;
+  background: radial-gradient(circle, rgba(255, 0, 127, 0.28) 0%, rgba(224, 0, 112, 0.18) 40%, rgba(192, 38, 211, 0.05) 70%, transparent 85%);
+  top: -150px;
+  left: -150px;
+  animation: auroraDrift1 20s ease-in-out infinite alternate;
+}
+
+/* Bottom-Right Deep Fuchsia & Violet Flare */
+.aurora-blob-2 {
+  width: 700px;
+  height: 700px;
+  background: radial-gradient(circle, rgba(224, 0, 112, 0.26) 0%, rgba(168, 85, 247, 0.16) 45%, rgba(255, 45, 149, 0.04) 75%, transparent 85%);
+  bottom: -150px;
+  right: -120px;
+  animation: auroraDrift2 24s ease-in-out infinite alternate;
+}
+
+/* Center Living Heartbeat Pulse */
+.aurora-blob-3 {
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(255, 45, 149, 0.2) 0%, rgba(192, 38, 211, 0.12) 40%, transparent 70%);
+  top: 35%;
+  left: 40%;
+  transform: translate(-50%, -50%);
+  animation: auroraPulse 16s ease-in-out infinite alternate;
+}
+
+/* Top-Right Cyber Accent Glow */
+.aurora-blob-4 {
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(217, 70, 239, 0.22) 0%, rgba(255, 0, 127, 0.1) 50%, transparent 75%);
+  top: -80px;
+  right: 5%;
+  animation: auroraDrift3 28s ease-in-out infinite alternate;
+}
+
+@keyframes auroraDrift1 {
+  0% { transform: translate(0, 0) scale(1) rotate(0deg); }
+  50% { transform: translate(100px, 80px) scale(1.15) rotate(15deg); }
+  100% { transform: translate(-40px, 120px) scale(0.92) rotate(-10deg); }
+}
+
+@keyframes auroraDrift2 {
+  0% { transform: translate(0, 0) scale(1) rotate(0deg); }
+  50% { transform: translate(-110px, -70px) scale(1.18) rotate(-15deg); }
+  100% { transform: translate(60px, -110px) scale(0.9) rotate(10deg); }
+}
+
+@keyframes auroraPulse {
+  0% { transform: translate(-50%, -50%) scale(0.85); opacity: 0.7; }
+  50% { transform: translate(-45%, -55%) scale(1.25); opacity: 1; }
+  100% { transform: translate(-55%, -45%) scale(0.95); opacity: 0.75; }
+}
+
+@keyframes auroraDrift3 {
+  0% { transform: translate(0, 0) scale(0.9); }
+  50% { transform: translate(-80px, 90px) scale(1.2); }
+  100% { transform: translate(40px, 50px) scale(1); }
+}
+
+/* 2. Cyber Horizon Grid Overlay */
+.cyber-grid-overlay {
+  position: absolute;
+  inset: 0;
+  background-image: 
+    linear-gradient(to right, rgba(255, 0, 127, 0.06) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 0, 127, 0.06) 1px, transparent 1px);
+  background-size: 55px 55px;
+  mask-image: radial-gradient(circle at 50% 45%, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0.4) 60%, transparent 90%);
+  -webkit-mask-image: radial-gradient(circle at 50% 45%, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0.4) 60%, transparent 90%);
+  opacity: 0.9;
+}
+
+/* 3. Subtle Vignette for Contrast & Focus */
+.vignette-overlay {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 50%, transparent 35%, rgba(4, 1, 7, 0.5) 75%, rgba(3, 1, 5, 0.85) 100%);
+}
+
+/* 4. Interactive Particles & Starfield Canvas */
+.particles-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
