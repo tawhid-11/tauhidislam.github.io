@@ -1,24 +1,34 @@
-import { Component, HostListener } from '@angular/core';
+import { Component, HostListener, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { PORTFOLIO_DATA } from './data/portfolio-data';
+import { BackgroundAnimationComponent } from './components/background-animation/background-animation';
 
 @Component({
   selector: 'app-root',
-  imports: [CommonModule, FormsModule, RouterOutlet, RouterLinkActive, RouterLink],
   standalone: true,
+  imports: [
+    CommonModule,
+    FormsModule,
+    RouterOutlet,
+    RouterLinkActive,
+    RouterLink,
+    BackgroundAnimationComponent
+  ],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
 export class AppComponent {
-  title = 'ng-portfolio';
-  isMenuOpen = false;
-  showScrollTop = false;
-  isContactModalOpen = false;
-  emailCopied = false;
-  activeContactTab: 'form' | 'links' = 'form';
-  profile = PORTFOLIO_DATA.profile;
+  title = 'Md. Tauhid Islam · Portfolio';
+  readonly profile = PORTFOLIO_DATA.profile;
+
+  // UI Reactive State via Angular 19 Signals
+  isMenuOpen = signal<boolean>(false);
+  showScrollTop = signal<boolean>(false);
+  isContactModalOpen = signal<boolean>(false);
+  emailCopied = signal<boolean>(false);
+  activeContactTab = signal<'form' | 'links'>('form');
 
   // Contact Form State
   contactForm = {
@@ -27,53 +37,60 @@ export class AppComponent {
     subject: '',
     message: ''
   };
-  isSubmitting = false;
-  submitSuccess = false;
-  submitError = '';
+  isSubmitting = signal<boolean>(false);
+  submitSuccess = signal<boolean>(false);
+  submitError = signal<string>('');
 
   toggleMenu(): void {
-    this.isMenuOpen = !this.isMenuOpen;
+    this.isMenuOpen.update(v => !v);
+  }
+
+  closeMenu(): void {
+    this.isMenuOpen.set(false);
   }
 
   openContactModal(tab: 'form' | 'links' = 'form'): void {
-    this.activeContactTab = tab;
-    this.isContactModalOpen = true;
-    this.isMenuOpen = false;
-    this.submitSuccess = false;
-    this.submitError = '';
+    this.activeContactTab.set(tab);
+    this.isContactModalOpen.set(true);
+    this.isMenuOpen.set(false);
+    this.submitSuccess.set(false);
+    this.submitError.set('');
   }
 
   closeContactModal(): void {
-    this.isContactModalOpen = false;
+    this.isContactModalOpen.set(false);
   }
 
   setContactTab(tab: 'form' | 'links'): void {
-    this.activeContactTab = tab;
+    this.activeContactTab.set(tab);
   }
 
   copyEmail(): void {
-    if (navigator.clipboard) {
+    if (navigator?.clipboard) {
       navigator.clipboard.writeText(this.profile.email).then(() => {
-        this.emailCopied = true;
-        setTimeout(() => (this.emailCopied = false), 2500);
+        this.emailCopied.set(true);
+        setTimeout(() => this.emailCopied.set(false), 2500);
+      }).catch(() => {
+        this.openEmailClient();
       });
     } else {
-      this.openEmail();
+      this.openEmailClient();
     }
   }
 
-  openEmail(): void {
+  openEmailClient(): void {
     window.location.href = `mailto:${this.profile.email}`;
   }
 
   async submitContactForm(): Promise<void> {
-    if (!this.contactForm.name || !this.contactForm.email || !this.contactForm.message) {
-      this.submitError = 'Please fill out your name, email, and message.';
+    const { name, email, message, subject } = this.contactForm;
+    if (!name.trim() || !email.trim() || !message.trim()) {
+      this.submitError.set('Please fill out your name, email, and message.');
       return;
     }
 
-    this.isSubmitting = true;
-    this.submitError = '';
+    this.isSubmitting.set(true);
+    this.submitError.set('');
 
     try {
       const response = await fetch('https://api.web3forms.com/submit', {
@@ -84,37 +101,37 @@ export class AppComponent {
         },
         body: JSON.stringify({
           access_key: 'b947c660-4963-48e0-8260-25e4c6c96896',
-          from_name: this.contactForm.name,
-          email: this.contactForm.email,
-          subject: this.contactForm.subject || `Portfolio Message from ${this.contactForm.name}`,
-          message: this.contactForm.message
+          from_name: name.trim(),
+          email: email.trim(),
+          subject: subject?.trim() || `Portfolio Inquiry from ${name.trim()}`,
+          message: message.trim()
         })
       });
 
       if (response.ok) {
-        this.submitSuccess = true;
+        this.submitSuccess.set(true);
         this.contactForm = { name: '', email: '', subject: '', message: '' };
       } else {
-        this.triggerMailtoFallback();
-        this.submitSuccess = true;
+        this.fallbackMailto();
+        this.submitSuccess.set(true);
       }
     } catch {
-      this.triggerMailtoFallback();
-      this.submitSuccess = true;
+      this.fallbackMailto();
+      this.submitSuccess.set(true);
     } finally {
-      this.isSubmitting = false;
+      this.isSubmitting.set(false);
     }
   }
 
-  private triggerMailtoFallback(): void {
-    const subject = encodeURIComponent(this.contactForm.subject || `Portfolio Inquiry from ${this.contactForm.name}`);
-    const body = encodeURIComponent(`Hi Tauhid,\n\n${this.contactForm.message}\n\nBest regards,\n${this.contactForm.name}\n${this.contactForm.email}`);
-    window.open(`mailto:${this.profile.email}?subject=${subject}&body=${body}`, '_blank');
+  private fallbackMailto(): void {
+    const sub = encodeURIComponent(this.contactForm.subject || `Inquiry from ${this.contactForm.name}`);
+    const body = encodeURIComponent(`Hi Tauhid,\n\n${this.contactForm.message}\n\nFrom: ${this.contactForm.name} (${this.contactForm.email})`);
+    window.open(`mailto:${this.profile.email}?subject=${sub}&body=${body}`, '_blank');
   }
 
-  @HostListener('window:scroll', [])
+  @HostListener('window:scroll')
   onWindowScroll(): void {
-    this.showScrollTop = window.scrollY > 300;
+    this.showScrollTop.set(window.scrollY > 300);
   }
 
   scrollToTop(): void {
@@ -123,7 +140,7 @@ export class AppComponent {
 
   @HostListener('document:keydown.escape')
   onEscape(): void {
-    if (this.isContactModalOpen) {
+    if (this.isContactModalOpen()) {
       this.closeContactModal();
     }
   }
